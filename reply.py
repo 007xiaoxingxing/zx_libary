@@ -42,7 +42,7 @@ class ArticalMsg(Msg):
             <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
             <CreateTime>{CreateTime}</CreateTime>
             <MsgType><![CDATA[news]]></MsgType>
-            <ArticleCount>2</ArticleCount>
+            <ArticleCount>1</ArticleCount>
             <Articles>
                 <item>
                 <Title><![CDATA[点击绑定]]></Title>
