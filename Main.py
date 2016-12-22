@@ -2,6 +2,7 @@
 import tornado.web
 import tornado.ioloop
 import hashlib
+import sys
 from WechatAPI import *
 from MsgService import *
 from reply import *
@@ -37,6 +38,8 @@ def main_app():
         (r'/',MainHandler),
     ])
 if __name__ == "__main__":
+    reload(sys)
+    sys.setdefaultencoding('utf8')
     app = main_app()
     app.listen(81)
     tornado.ioloop.IOLoop.instance().start()

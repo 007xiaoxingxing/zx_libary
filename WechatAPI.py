@@ -15,7 +15,7 @@ class WechatAPI:
         result = {"fromUser":fromUser,"toUser":toUser,"createTime":createTime,"msgId":msgId,"msgType":msgType}
         #拼装文本消息
         if msgType == 'text':
-            msgContent = root.find('Content').text.encode('utf-8')
-            result["msgContent"] = msgContent.decode('utf-8').decode('utf-8')
+            msgContent = root.find('Content').text
+            result["msgContent"] = msgContent
             return result
 
