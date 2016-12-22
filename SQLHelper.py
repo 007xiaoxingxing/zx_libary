@@ -42,7 +42,7 @@ class SQLHelper:
         except Exception, e:
             print e
             if str(e) == "column openid is not unique":
-                return "already bind"
+                return "亲，你已经绑定过了"
         conn.commit()
         conn.close()
         return "success"
