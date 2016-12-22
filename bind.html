@@ -6,12 +6,13 @@
     <title>用户绑定</title>
     <link rel="stylesheet" href="css/weui.min.css"/>
     <link rel="stylesheet" href="css/bind.css"/>
-    <script type="application/javascript" src="js/jquery-3.1.1.min.js"></script>>
+    <script type="application/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script>
         $(document).ready(function(){
 
 
         $(".submit-btn").click(function(){
+            alert(/a/);
             var name = $(".user-name").val()
             var phone = $(".phone-num").val()
             var openid = {{openid}};
