@@ -10,4 +10,16 @@
 
 .submit{
     margin-top: 10%;
+    text-align: center;
+}
+.success{
+   /* display: none;*/
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+.success-text{
+
+    margin-left: 20%;
 }
