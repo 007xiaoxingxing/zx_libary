@@ -7,8 +7,11 @@ from WechatAPI import *
 class MainHandler(tornado.web.RequestHandler):
     def post(self):
         wechatXML = self.request.body
-
-        self.write("aaa")
+        API = WechatAPI()
+        dictMsg = API.ParseWechatXML(wechatXML)
+        fromUser = dictMsg['fromUser']
+        toUser = dictMsg['toUser']
+        self.write(fromUser+"---"+toUser)
     #处理来自微信服务器的get请求，即第一次的认证请求
     def get(self):
         signature = self.get_argument('signature')
