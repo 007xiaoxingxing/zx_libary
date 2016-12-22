@@ -8,5 +8,6 @@ class MsgService:
         if msgDict['msgType'] == 'text' and msgDict['msgContent'] == "借书":
             return TextMsg(toUser,fromUser,u"有人借书拉".encode('utf-8')).format()
         else:
+            print msgDict['msgContent']
             return TextMsg(toUser,fromUser,msgDict['msgContent']).format()
 
