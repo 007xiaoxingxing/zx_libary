@@ -18,7 +18,7 @@
             $.ajax({
                 url:"bind",
                 type:"POST",
-                data:"{'user':"+name+",'phone':"+phone+"'openid':"+openid+"}",
+                data:"{'user':"+name+",'phone':"+phone+",'openid':"+openid+"}",
                 success:function(data){
                     if(data == "success"){
                         $(".success").show()
