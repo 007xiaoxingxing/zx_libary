@@ -11,8 +11,8 @@ class MainHandler(tornado.web.RequestHandler):
         wechatXML = self.request.body
         API = WechatAPI()
         dictMsg = API.ParseWechatXML(wechatXML)
-        fromUser = dictMsg['fromUser']
-        toUser = dictMsg['toUser']
+        toUser = dictMsg['fromUser']
+        fromUser = dictMsg['toUser']
         res = TextMsg(toUser,fromUser,"abcd")
         print res.send()
         self.write(res.send())
