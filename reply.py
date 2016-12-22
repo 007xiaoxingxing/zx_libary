@@ -26,4 +26,6 @@ class TextMsg(Msg):
         <Content><![CDATA[{Content}]]></Content>
         </xml>
         """
+        #print self.__dict
         return XmlForm.format(**self.__dict)
+        #return XmlForm.format(**{'ToUserName':"abc","FromUserName":"aa","CreateTime":"aa","Content":"中文"})
