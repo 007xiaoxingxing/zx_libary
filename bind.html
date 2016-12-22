@@ -48,20 +48,21 @@
 </body>
 <script type="application/javascript" src="js/jquery-3.1.1.min.js"/>
 <script>
-    var name = $(".user-name").val()
-    var phone = $("phone-num").val()
-    $(".submit-btn").click(function(){
+    $(document).ready(function(){
 
-        $.ajax({
+        var name = $(".user-name").val()
+        var phone = $("phone-num").val()
+        $(".submit-btn").click(function(){
 
-            url:"bind",
-            type:"POST",
-            data:"{'user':"+name+",'phone':"+phone+"'openid':"+name+"}",
-            success:function(data){
-                location.href="http://lib.star-chen";
-            }
+            $.ajax({
+                url:"bind",
+                type:"POST",
+                data:"{'user':"+name+",'phone':"+phone+"'openid':"+name+"}",
+                success:function(data){
+                    $(".success").show()
+                }
+            })
         })
-
     })
 </script>
 </html>
