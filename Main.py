@@ -13,7 +13,8 @@ class MainHandler(tornado.web.RequestHandler):
         dictMsg = API.ParseWechatXML(wechatXML)
         fromUser = dictMsg['fromUser']
         toUser = dictMsg['toUser']
-        self.write(msgser(dictMsg))
+        res = msgser(dictMsg)
+        self.write("aaa")
     #处理来自微信服务器的get请求，即第一次的认证请求
     def get(self):
         signature = self.get_argument('signature')
