@@ -38,7 +38,7 @@ class MainHandler(tornado.web.RequestHandler):
 class BindHandler(tornado.web.RequestHandler):
     def get(self):
         openid = self.get_argument('openid')
-        self.render("bind.html")
+        self.render("bind.html",openid=openid)
         pass
     def post(self):
         pass

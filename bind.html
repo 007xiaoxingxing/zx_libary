@@ -6,6 +6,26 @@
     <title>用户绑定</title>
     <link rel="stylesheet" href="css/weui.min.css"/>
     <link rel="stylesheet" href="css/bind.css"/>
+    <script type="application/javascript" src="js/jquery-3.1.1.min.js"></script>>
+    <script>
+        $(document).ready(function(){
+
+
+        $(".submit-btn").click(function(){
+            var name = $(".user-name").val()
+            var phone = $(".phone-num").val()
+            var openid = {{openid}};
+            $.ajax({
+                url:"bind",
+                type:"POST",
+                data:"{'user':"+name+",'phone':"+phone+"'openid':"+name+"}",
+                success:function(data){
+                    $(".success").show()
+                }
+            })
+        })
+    })
+    </script>
 </head>
 <body>
     <div class="container">
@@ -46,23 +66,4 @@
             <p class="weui-footer__text">Copyright &copy; 2016-2017 star-chen.com</p>
     </div>
 </body>
-<script type="application/javascript" src="js/jquery-3.1.1.min.js"/>
-<script>
-    $(document).ready(function(){
-
-        var name = $(".user-name").val()
-        var phone = $("phone-num").val()
-        $(".submit-btn").click(function(){
-
-            $.ajax({
-                url:"bind",
-                type:"POST",
-                data:"{'user':"+name+",'phone':"+phone+"'openid':"+name+"}",
-                success:function(data){
-                    $(".success").show()
-                }
-            })
-        })
-    })
-</script>
 </html>
