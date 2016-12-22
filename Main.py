@@ -9,7 +9,7 @@ class MainHandler(tornado.web.RequestHandler):
     def post(self):
         wechatXML = self.request.body
         API = WechatAPI()
-        msgser = MsgService()
+        #msgser = MsgService()
         dictMsg = API.ParseWechatXML(wechatXML)
         fromUser = dictMsg['fromUser']
         toUser = dictMsg['toUser']
