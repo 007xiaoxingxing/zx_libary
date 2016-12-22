@@ -17,7 +17,7 @@ class MsgService:
         else:
             tuling_url = "http://www.tuling123.com/openapi/api"
             key = "ad4c133e35c744acb3c707bd27d74e87"
-            data = {'key':key,'info':msgDict['msgContent']}
+            data = {'key':key,'info':msgDict['msgContent'],'userid':toUser}
             res = urllib2.urlopen(tuling_url,urllib.urlencode(data)).read()
             return TextMsg(toUser,fromUser,json.loads(res)['text']).format()
 
