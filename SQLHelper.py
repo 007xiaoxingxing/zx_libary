@@ -31,14 +31,16 @@ class SQLHelper:
 
     #添加新用户
     def AddUser(self,name,phone,openid):
-        cur = self.GetCursor()
+        conn = self.GetConn()
+        cur = conn.cursor()
         addSQL = '''
             INSERT INTO user(name,phone,openid) values("{0}","{1}","{2}")
         '''
-        print addSQL.format(name,phone,openid)
-        cur.execute(addSQL.format(name,phone,openid))
+        sql = addSQL.format(name,phone,openid)
+        cur.execute(sql)
+        conn.commit()
+        conn.close()
     #获取数据库连接
-    def GetCursor(self):
+    def GetConn(self):
         conn = sqlite3.connect(self.dbName)
-        return conn.cursor()
-        pass
+        return conn
