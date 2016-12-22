@@ -10,10 +10,11 @@ class MainHandler(tornado.web.RequestHandler):
     def post(self):
         wechatXML = self.request.body
         API = WechatAPI()
+        msgService = MsgService()
         dictMsg = API.ParseWechatXML(wechatXML)
         toUser = dictMsg['fromUser']
         fromUser = dictMsg['toUser']
-        res = TextMsg(toUser,fromUser,"abcd")
+        res = msgService(dictMsg)
         print res.send()
         self.write(res.send())
     #处理来自微信服务器的get请求，即第一次的认证请求
