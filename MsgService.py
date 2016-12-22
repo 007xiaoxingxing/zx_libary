@@ -13,8 +13,9 @@ class MsgService:
         elif msgDict['msgType'] == 'text' and msgDict['msgContent'] == "还书":
             return TextMsg(toUser,fromUser,"有人还书拉").format()
         if msgDict['msgType'] == 'text' and msgDict['msgContent'] == "绑定":
-            return TextMsg(toUser,fromUser,"有人要绑定拉").format()
+            return ArticalMsg(toUser,fromUser).format()
         else:
+            #调用图灵机器人接口回复一些其他内容
             tuling_url = "http://www.tuling123.com/openapi/api"
             key = "ad4c133e35c744acb3c707bd27d74e87"
             data = {'key':key,'info':msgDict['msgContent'],'userid':toUser}
