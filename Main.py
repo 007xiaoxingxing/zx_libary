@@ -3,6 +3,7 @@ import tornado.web
 import tornado.ioloop
 import hashlib
 import sys
+import json
 from WechatAPI import *
 from MsgService import *
 from reply import *
@@ -39,9 +40,12 @@ class BindHandler(tornado.web.RequestHandler):
     def get(self):
         openid = self.get_argument('openid')
         self.render("bind.html",openid=openid)
-        pass
     def post(self):
-        pass
+        postBody = json.loads(self.request.body)
+        userName = postBody['user']
+        userPhone = postBody['phone']
+        userOpenID = postBody['openid']
+        self.write('success')
 def main_app():
     return tornado.web.Application([
         (r'/',MainHandler),

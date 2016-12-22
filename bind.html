@@ -18,9 +18,11 @@
             $.ajax({
                 url:"bind",
                 type:"POST",
-                data:"{'user':"+name+",'phone':"+phone+"'openid':"+name+"}",
+                data:"{'user':"+name+",'phone':"+phone+"'openid':"+openid+"}",
                 success:function(data){
-                    $(".success").show()
+                    if(data == "success"){
+                        $(".success").show()
+                    }
                 }
             })
         })
