@@ -8,4 +8,5 @@ class MsgService(tornado.web.RequestHandler):
     def GetMsgRouter(self,msgDict):
         if msgDict['msgType'] == 'text':
             createTime = int(time.time())
-            print self.render("msgxml/text_msg.xml",toUser = msgDict['fromUser'],fromUser = msgDict['toUser'],createTime = createTime,msgContent=msgDict['msgContent'])
+            #print self.render("msgxml/text_msg.xml",toUser = msgDict['fromUser'],fromUser = msgDict['toUser'],createTime = createTime,msgContent=msgDict['msgContent'])
+            print self.render_string("msgxml/text_msg.xml")
