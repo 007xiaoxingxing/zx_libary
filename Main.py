@@ -49,6 +49,7 @@ class BindHandler(tornado.web.RequestHandler):
         userOpenID = postBody['openid']
         #将数据插入sqlite数据库中
         sqlHelper = SQLHelper()
+        sqlHelper.DBInit()
         sqlHelper.AddUser(userName,userPhone,userOpenID)
         self.write('success')
 def main_app():
