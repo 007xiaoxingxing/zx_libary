@@ -12,10 +12,11 @@
 
 
         $(".submit-btn").click(function(){
-            alert(/a/);
+
             var name = $(".user-name").val()
             var phone = $(".phone-num").val()
             var openid = {{openid}};
+             alert(openid);
             $.ajax({
                 url:"bind",
                 type:"POST",
