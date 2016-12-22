@@ -7,6 +7,7 @@ from WechatAPI import *
 from MsgService import *
 from reply import *
 
+#微信消息的主入口函数
 class MainHandler(tornado.web.RequestHandler):
     def post(self):
         wechatXML = self.request.body
@@ -33,9 +34,18 @@ class MainHandler(tornado.web.RequestHandler):
         hashcode = sha1.hexdigest()
         if hashcode == signature:
             self.write(echostr)
+#处理绑定操作的handler
+class BindHandler(tornado.web.RequestHandler):
+    def get(self):
+        openid = self.get_argument('openid')
+        self.render("bind.html")
+        pass
+    def post(self):
+        pass
 def main_app():
     return tornado.web.Application([
         (r'/',MainHandler),
+        (r'/bind',BindHandler)
     ])
 if __name__ == "__main__":
     reload(sys)

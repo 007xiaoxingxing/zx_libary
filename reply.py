@@ -33,7 +33,7 @@ class ArticalMsg(Msg):
         self.__dict['ToUserName'] = toUserName
         self.__dict['FromUserName'] = fromUserName
         self.__dict['CreateTime'] = int(time.time())
-        self.__dict['OpenID'] = fromUserName
+        self.__dict['OpenID'] = toUserName
 
     def format(self):
         XmlForm = """
@@ -45,8 +45,8 @@ class ArticalMsg(Msg):
             <ArticleCount>1</ArticleCount>
             <Articles>
                 <item>
-                <Title><![CDATA[点击绑定]]></Title>
-                <Description><![CDATA[点此图片,绑定到公众号]]></Description>
+                <Title><![CDATA[点击进入绑定流程~]]></Title>
+                <Description><![CDATA[霞姐说了,不绑定是没法用滴]]></Description>
                 <PicUrl><![CDATA[https://blog.star-chen.com/img/bg.jpg]]></PicUrl>
                 <Url><![CDATA[http://lib.star-chen.com/bind?openid={OpenID}]]></Url>
                 </item>
