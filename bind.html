@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>用户绑定</title>
+     <link rel="stylesheet" href="css/weui.min.css"/>
+    <link rel="stylesheet" href="css/bind.css"/>
 </head>
 <body>
-    <form action="bind" method="post">
-        姓名:<input type="text" />
-        手机:<imput type="text" />
-        <input type="submit"/>
-    </form>
+    <div class="container">
+    <div class="weui-cells weui-cells_form">
+            <div class="weui-cell name">
+                <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number"  placeholder="请填写您的姓名"/>
+                </div>
+            </div>
+            <div class="weui-cell phone">
+                    <div class="weui-cell__hd"><label class="weui-label">手机号码</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请填写您的手机号码"/>
+                    </div>
+            </div>
+
+    </div>
+
+    <div class="submit">
+           <a href="javascript:;" class="weui-btn weui-btn_primary">绑  定</a>
+    </div>
+
+    </div>
 </body>
 </html>
