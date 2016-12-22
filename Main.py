@@ -14,7 +14,7 @@ class MainHandler(tornado.web.RequestHandler):
         dictMsg = API.ParseWechatXML(wechatXML)
         toUser = dictMsg['fromUser']
         fromUser = dictMsg['toUser']
-        res = msgService(dictMsg)
+        res = msgService.GetMsgRouter(dictMsg)
         print res.send()
         self.write(res.send())
     #处理来自微信服务器的get请求，即第一次的认证请求
