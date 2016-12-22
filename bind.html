@@ -22,10 +22,10 @@
                 data:"{\"user\":\""+name+"\",\"phone\":\""+phone+"\",\"openid\":\""+openid+"\"}",
                 success:function(data){
                     if(data == "success"){
-                        $(".bind-info").show()
+                        $(".success").show()
                     }else {
                         $(".bind-info").html(data)
-                        $(".bind-info").show()
+                        $(".success").show()
 
                     }
                 }
