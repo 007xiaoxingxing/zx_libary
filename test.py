@@ -14,6 +14,6 @@ print json.loads(res)['text']
 path = os.path.realpath(__file__)
 print path
 sqlHelper = SQLHelper()
-#sqlHelper.DBInit()
+sqlHelper.DBInit()
 sqlHelper.AddUser("张三","13800138000","vasdflasdlfjalsdkfjljl")
 

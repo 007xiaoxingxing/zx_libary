@@ -19,7 +19,7 @@ class SQLHelper:
             `id`	INTEGER PRIMARY KEY AUTOINCREMENT,
             `name`	TEXT,
             `phone`	NUMERIC,
-            `openid`	TEXT
+            `openid` TEXT UNIQUE
             );
        '''
         cu.execute(userTable)
@@ -37,9 +37,15 @@ class SQLHelper:
             INSERT INTO user(name,phone,openid) values("{0}","{1}","{2}")
         '''
         sql = addSQL.format(name,phone,openid)
-        cur.execute(sql)
+        try:
+            cur.execute(sql)
+        except Exception, e:
+            print e
+            if str(e) == "column openid is not unique":
+                return "already bind"
         conn.commit()
         conn.close()
+        return "success"
     #获取数据库连接
     def GetConn(self):
         conn = sqlite3.connect(self.dbName)

@@ -22,7 +22,11 @@
                 data:"{\"user\":\""+name+"\",\"phone\":\""+phone+"\",\"openid\":\""+openid+"\"}",
                 success:function(data){
                     if(data == "success"){
-                        $(".success").show()
+                        $(".bind-info").show()
+                    }else {
+                        $(".bind-info").html(data)
+                        $(".bind-info").show()
+
                     }
                 }
             })
@@ -57,7 +61,7 @@
         <div class="icon-box">
             <i class="weui-icon-success weui-icon_msg"></i>
             <div class="icon-box__ctn">
-                <h5 class="icon-box__title success-text">绑定成功！</h5>
+                <h5 class="icon-box__title bind-info">绑定成功！</h5>
          </div>
     </div>
    </div>
