@@ -4,17 +4,17 @@ import tornado.ioloop
 import hashlib
 from WechatAPI import *
 from MsgService import *
+from reply import *
 
 class MainHandler(tornado.web.RequestHandler):
     def post(self):
         wechatXML = self.request.body
         API = WechatAPI()
-        #msgser = MsgService()
         dictMsg = API.ParseWechatXML(wechatXML)
         fromUser = dictMsg['fromUser']
         toUser = dictMsg['toUser']
-        #res = msgser(dictMsg)
-        self.write("aaa")
+        res = TextMsg(toUser,fromUser,"abcd");
+        self.write(res)
     #处理来自微信服务器的get请求，即第一次的认证请求
     def get(self):
         signature = self.get_argument('signature')
