@@ -6,6 +6,7 @@ import sys
 import json
 from WechatAPI import *
 from MsgService import *
+from SQLHelper import *
 from reply import *
 
 #微信消息的主入口函数
@@ -41,10 +42,14 @@ class BindHandler(tornado.web.RequestHandler):
         openid = self.get_argument('openid')
         self.render("bind.html",openid=openid)
     def post(self):
+        #取得用户提交的json字符串，取出参数
         postBody = json.loads(self.request.body)
         userName = postBody['user']
         userPhone = postBody['phone']
         userOpenID = postBody['openid']
+        #将数据插入sqlite数据库中
+        sqlHelper = SQLHelper()
+        sqlHelper.AddUser(userName,userPhone,userOpenID)
         self.write('success')
 def main_app():
     return tornado.web.Application([
