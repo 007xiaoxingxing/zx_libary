@@ -6,7 +6,7 @@ class MsgService:
         toUser = msgDict['fromUser']
         fromUser = msgDict['toUser']
         if msgDict['msgType'] == 'text' and msgDict['msgContent'] == "借书":
-            return TextMsg(toUser,fromUser,"有人借书拉").send()
+            return TextMsg(toUser,fromUser,"有人借书拉").format()
         else:
-            return TextMsg(toUser,fromUser,msgDict['msgContent']).send()
+            return TextMsg(toUser,fromUser,msgDict['msgContent']).format()
 

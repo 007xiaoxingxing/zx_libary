@@ -5,7 +5,7 @@ import time
 class Msg(object):
     def __init__(self):
         pass
-    def send(self):
+    def format(self):
         return "success"
 
 class TextMsg(Msg):
@@ -16,7 +16,7 @@ class TextMsg(Msg):
         self.__dict['CreateTime'] = int(time.time())
         self.__dict['Content'] = content
 
-    def send(self):
+    def format(self):
         XmlForm = """
         <xml>
         <ToUserName><![CDATA[{ToUserName}]]></ToUserName>

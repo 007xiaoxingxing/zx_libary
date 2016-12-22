@@ -15,8 +15,8 @@ class MainHandler(tornado.web.RequestHandler):
         toUser = dictMsg['fromUser']
         fromUser = dictMsg['toUser']
         res = msgService.GetMsgRouter(dictMsg)
-        print res.send()
-        self.write(res.send())
+        print res
+        self.write(res)
     #处理来自微信服务器的get请求，即第一次的认证请求
     def get(self):
         signature = self.get_argument('signature')
