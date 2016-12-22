@@ -3,7 +3,7 @@ import tornado.web
 import time
 class MsgService(tornado.web.RequestHandler):
     def __int__(self):
-        pass
+        print "msg ser init"
     #获取消息路由，确定由哪个具体的方法来处理消息，也就是设置关键字
     def GetMsgRouter(self,msgDict):
         if msgDict['msgType'] == 'text':
