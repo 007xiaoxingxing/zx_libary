@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import tornado.web
 import time
 class MsgService(tornado.web.RequestHandler):
