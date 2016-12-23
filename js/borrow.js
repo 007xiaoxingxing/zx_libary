@@ -64,7 +64,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == "success") {
                     $("#borrow-dlg").hide();
-                    $("#book-" + bookID + " .book-status").html("借出待审");
+                    $("#book-" + bookID + " .book-status").html("外借待办");
                     $("#book-" + bookID + " .book-status").css("color", "#f00");
 
                 }
