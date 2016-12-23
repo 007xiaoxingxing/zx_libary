@@ -97,7 +97,13 @@ class BorrowInfoHandler(tornado.web.RequestHandler):
         temp['borrowTime'] = time2date
         print temp
         self.write(json.dumps(temp))
-
+#管理员审核借书的情况
+class CheckHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("check.html")
+        pass
+    def post(self):
+        pass
 #个人中心
 class PersonHandler(tornado.web.RequestHandler):
     def get(self):
