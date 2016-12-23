@@ -16,7 +16,10 @@ $(document).ready(function () {
 
     $(".book-item").click(function () {
 
+        var book_id = $(this).attr("id").substr(5);
+        console.log(book_id);
         $("#borrow-dlg").show();
+
     });
 
     $(".give-up").click(function () {
@@ -29,8 +32,6 @@ $(document).ready(function () {
         var openid = "123";
         var bookID = "1";
         $.ajax({
-
-
             url: "borrow",
             type: "POST",
             data: "{\"openID\":\""+openid+"\",\""+bookID+"\":\"1\"}",

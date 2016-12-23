@@ -23,7 +23,7 @@
     <div class="book-list">
         {% for book in book_list%}
         <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg book-item" id="book-1">
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg book-item" id="book-{{book[0]}}">
                 <div class="weui-media-box__hd">
                     <img class="weui-media-box__thumb"
                          src="{{book[4]}}"
@@ -34,7 +34,11 @@
                     <p class="weui-media-box__desc">{{book[2]}}</p>
                 </div>
                 <div class="weui-media-box__bd">
+                    {% if book[3] == 0 %}
                     <p class="weui-media-box__desc book-status" style="color: #04be02;font-size: medium">可外借</p>
+                    {% else %}
+                    <p class="weui-media-box__desc book-status" style="color: #ff0000;font-size: medium">已借出</p>
+                    {{% end %}}
                 </div>
             </a>
         </div>
@@ -55,7 +59,7 @@
 </div>
 <div class="weui-footer weui-footer_fixed-bottom">
     <p class="weui-footer__links">
-        <a href="#" class="weui-footer__link">霞姐是管理员</a>
+        <a href="#" class="weui-footer__link">小陈陈是管理员</a>
     </p>
     <p class="weui-footer__text">Copyright &copy; 2016-2017 star-chen.com</p>
 </div>
