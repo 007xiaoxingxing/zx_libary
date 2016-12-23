@@ -52,6 +52,8 @@ class SQLHelper:
         cu.execute(userTable) #创建用户表
         cu.execute(bookTable) #创建书籍表
         cu.execute(borrowTable) #创建借阅关系表
+        #add a test book
+        cu.execute("insert into book(book_name,book_des,book_status,book_photo) values(\"abc\",\"good book\",0,\"abc.jpg\")")
         conn.commit()
         conn.close()
         pass
