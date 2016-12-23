@@ -62,7 +62,7 @@ class BorrowBookHandler(tornado.web.RequestHandler):
 def main_app():
     return tornado.web.Application([
         (r'/',MainHandler),
-        (r'/bind',BindHandler)
+        (r'/bind',BindHandler),
         (r'/borrow',BorrowBookHandler)
     ])
 if __name__ == "__main__":
