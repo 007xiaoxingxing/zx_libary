@@ -86,7 +86,7 @@ class SQLHelper:
     #借书的数据库插入函数
     def BorrowBook(self,userID,bookID,borrowTime):
         borrowSQL = '''
-            INSERT INTO borrow_list(userid, bookid, borrow_time, back_time) values({1}, {2}, {3}, {4})
+            INSERT INTO borrow_list(userid, bookid, borrow_time, back_time) values({0}, {1}, {2}, {3})
         '''
         borrowSQL = borrowSQL.format(userID, bookID, borrowTime, 0)
         conn = self.GetConn()
