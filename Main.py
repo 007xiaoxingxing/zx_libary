@@ -101,7 +101,8 @@ def main_app():
         (r'/bind',BindHandler),
         (r'/borrow',BorrowBookHandler),
         (r'/back',BackBookHandler),
-        (r'/person',PersonHandler)
+        (r'/person',PersonHandler),
+        (r'/borrowInfo',BorrowInfoHandler)
     ])
 if __name__ == "__main__":
     reload(sys)
