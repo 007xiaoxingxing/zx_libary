@@ -15,22 +15,25 @@ $(document).ready(function () {
             });
 
             $(".book-item").click(function () {
-
-                $("#borrow-dlg").show();
+                var book_id =$(this).attr("book-id");
+                $("#back-dlg").attr("openid",book_id);
+                $("#back-dlg").show();
             });
 
             $(".give-up").click(function () {
 
-                $("#borrow-dlg").hide();
+                $("#back-dlg").hide();
 
             });
     $(".back-it").click(function () {
 
+        var openid =$(".back-it").attr("openid");
+        var book_id =$("#back-dlg").attr("openid");
         $.ajax({
 
             url:"back",
             type:"POST",
-            data:"{\"openID\":\"123\",\"bookID\":\"1\"}",
+            data:"{\"openID\":\""+open()+"\",\"bookID\":\""+book_id+"\"}",
             success:function(data){
                 alert(data);
             }

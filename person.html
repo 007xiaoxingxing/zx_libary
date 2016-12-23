@@ -23,7 +23,7 @@
     <div class="book-list">
         {% for book in borrow_list %}
         <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg book-item">
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg book-item" book-id="{{book[0]}}">
                 <div class="weui-media-box__hd">
                     <img class="weui-media-box__thumb"
                          src="{{book[4]}}"
@@ -40,14 +40,14 @@
     </div>
 </div>
 <!-- 对话框 -->
-<div class="js_dialog" id="borrow-dlg" style="display:none;">
+<div class="js_dialog" id="back-dlg" style="display:none;">
     <div class="weui-mask"></div>
     <div class="weui-dialog">
         <div class="weui-dialog__hd"><strong class="weui-dialog__title">确定要把我还给霞姐吗？</strong></div>
         <div class="weui-dialog__bd">书籍的一些信息</div>
         <div class="weui-dialog__ft">
             <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default give-up">算了,我还要看</a>
-            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary back-it">还了它!</a>
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary back-it" openid="{{openid}}">还了它!</a>
         </div>
     </div>
 </div>
