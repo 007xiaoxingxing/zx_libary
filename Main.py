@@ -100,11 +100,13 @@ class BorrowInfoHandler(tornado.web.RequestHandler):
 #管理员审核借书的情况
 class CheckHandler(tornado.web.RequestHandler):
     def get(self):
-        checkSQL = "select * from borrow_check where checked = 0"
+        checkSQL = "select * from borrow_list where checked = 0"
         sqlHelper = SQLHelper()
-        result = sqlHelper.ExcuteSQL(checkSQL)
-        print result
-        self.render("check.html",events = result)
+        borrow_list = sqlHelper.ExcuteSQL(checkSQL)
+        for event in borrow_list:
+            print event
+        #print borrow_list
+        self.render("check.html",events = borrow_list)
         pass
     def post(self):
         pass
