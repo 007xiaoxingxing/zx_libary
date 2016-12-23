@@ -89,6 +89,7 @@ def main_app():
         (r'/',MainHandler),
         (r'/bind',BindHandler),
         (r'/borrow',BorrowBookHandler),
+        (r'/back',BackBookHandler),
         (r'/person',PersonHandler)
     ])
 if __name__ == "__main__":
