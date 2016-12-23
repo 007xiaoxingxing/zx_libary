@@ -1,13 +1,15 @@
 # -*- coding:utf-8 -*-
-import tornado.web
-import tornado.ioloop
-import hashlib
-import sys
-import json
 from WechatAPI import *
 from MsgService import *
 from SQLHelper import *
-from reply import *
+import hashlib
+import sys
+import json
+import time
+import tornado.web
+import tornado.ioloop
+
+
 
 #微信消息的主入口函数
 class MainHandler(tornado.web.RequestHandler):
@@ -16,8 +18,6 @@ class MainHandler(tornado.web.RequestHandler):
         API = WechatAPI()
         msgService = MsgService()
         dictMsg = API.ParseWechatXML(wechatXML)
-        toUser = dictMsg['fromUser']
-        fromUser = dictMsg['toUser']
         res = msgService.GetMsgRouter(dictMsg)
         print res
         self.write(res)
@@ -57,7 +57,14 @@ class BorrowBookHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('borrow.html')
     def post(self):
-        pass
+        postBody = json.loads(self.request.body)
+        bookID = postBody['bookID']
+        userOpenID = postBody['openID']
+        currentTime = time.time()
+        sqlHelper = SQLHelper()
+        userID = sqlHelper.GetUserID(userOpenID)
+        result = sqlHelper.BorrowBook(userID,bookID,currentTime)
+        self.write(result)
 #个人中心
 class PersonHandler(tornado.web.RequestHandler):
     def get(self):

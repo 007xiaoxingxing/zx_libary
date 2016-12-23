@@ -15,5 +15,6 @@ path = os.path.realpath(__file__)
 print path
 sqlHelper = SQLHelper()
 sqlHelper.DBInit()
-sqlHelper.AddUser("张三","13800138000","vasdflasdlfjalsdkfjljl")
+#sqlHelper.AddUser("张三","13800138000","vasdflasdlfjalsdkfjljl")
+sqlHelper.GetUserID("vasdflasdlfjalsdkfjljl")
 

@@ -58,6 +58,11 @@ class SQLHelper:
 
     #执行sql语句，返回结果
     def ExcuteSQL(self,sql):
+        conn = self.GetConn()
+        cur = conn.cursor()
+        cur.execute(sql)
+        conn.commit()
+        conn.close()
         pass
 
     #添加新用户
@@ -74,9 +79,33 @@ class SQLHelper:
             print e
             if str(e) == "column openid is not unique":
                 return "您已经绑定过了"
-        conn.commit()
-        conn.close()
+        finally:
+            conn.commit()
+            conn.close()
         return "success"
+    #借书的数据库插入函数
+    def BorrowBook(self,userID,bookID,borrowTime):
+        borrowSQL = '''
+            INSERT INTO borrow_list(userid, bookid, borrow_time, back_time) values({1}, {2}, {3}, {4})
+        '''
+        borrowSQL = borrowSQL.format(userID, bookID, borrowTime, 0)
+        conn = self.GetConn()
+        cur = conn.cursor()
+        try:
+            cur.execute(borrowSQL)
+        except Exception,e:
+            print e
+        finally:
+            conn.commit()
+            conn.close()
+        pass
+    #根据openid获取用户id
+    def GetUserID(self,openID):
+        conn = self.GetConn()
+        cur = conn.cursor()
+        cur.execute("select id from user where openid=\"%s\""%openID)
+        id = cur.fetchone()[0]
+        return id
     #获取数据库连接
     def GetConn(self):
         conn = sqlite3.connect(self.dbName)
