@@ -4,38 +4,38 @@
 $(document).ready(function () {
 
     $(".borrow").click(function () {
-
-        location.href = "http://lib.star-chen.com/borrow?openid=123";
+        var openid = $("#borrow-dlg").attr("openid");
+        location.href = "http://lib.star-chen.com/borrow?openid=" + openid;
 
     });
     $(".person").click(function () {
-
-        location.href = "http://lib.star-chen.com/person?openid=123";
+        var openid = $("#borrow-dlg").attr("openid");
+        location.href = "http://lib.star-chen.com/person?openid=" + openid;
 
     });
 
     $(".book-item").click(function () {
 
         var book_id = $(this).attr("id").substr(5);
-        var status = $("#book-"+book_id+" .book-status").html();
-        if(status == "可外借"){
-            var book_des = $("#book-"+book_id+" .origin-des").html();
+        var status = $("#book-" + book_id + " .book-status").html();
+        if (status == "可外借") {
+            var book_des = $("#book-" + book_id + " .origin-des").html();
             $(".book-des").html(book_des);
-            $("#borrow-dlg").attr("book_id",book_id);
+            $("#borrow-dlg").attr("book_id", book_id);
             $("#borrow-dlg").show();
         }
-        else if(status == "已借出")
+        else if (status == "已借出")
             $.ajax({
 
-                url:"borrowInfo?bookid="+book_id,
-                type:"GET",
-                success:function(data){
-                    if(data != ""){
+                url: "borrowInfo?bookid=" + book_id,
+                type: "GET",
+                success: function (data) {
+                    if (data != "") {
 
                         obj = JSON.parse(data);
                         borrower = obj.borrower;
                         borrow_time = obj.borrowTime;
-                        info = borrower +"借于"+borrow_time;
+                        info = borrower + "借于" + borrow_time;
                         console.log(info);
                         $(".borrow_detail").html(info);
                         $("#borrow-info").show();
@@ -60,12 +60,12 @@ $(document).ready(function () {
         $.ajax({
             url: "borrow",
             type: "POST",
-            data: "{\"openID\":\""+openid+"\",\"bookID\":\""+bookID+"\"}",
+            data: "{\"openID\":\"" + openid + "\",\"bookID\":\"" + bookID + "\"}",
             success: function (data) {
                 if (data == "success") {
                     $("#borrow-dlg").hide();
-                    $("#book-"+bookID+" .book-status").html("已借出");
-                    $("#book-"+bookID+" .book-status").css("color", "#f00");
+                    $("#book-" + bookID + " .book-status").html("已借出");
+                    $("#book-" + bookID + " .book-status").css("color", "#f00");
 
                 }
             }

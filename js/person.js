@@ -4,13 +4,13 @@
 $(document).ready(function () {
 
             $(".borrow").click(function () {
-
-                location.href = "http://lib.star-chen.com/borrow?openid=123";
+                openid = $(".back-it").attr("openid");
+                location.href = "http://lib.star-chen.com/borrow?openid="+openid;
 
             });
             $(".person").click(function () {
-
-                location.href = "http://lib.star-chen.com/person?openid=123";
+                openid = $(".back-it").attr("openid");
+                location.href = "http://lib.star-chen.com/person?openid="+openid;
 
             });
 
