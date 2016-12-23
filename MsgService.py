@@ -9,11 +9,11 @@ class MsgService:
         toUser = msgDict['fromUser']
         fromUser = msgDict['toUser']
         if msgDict['msgType'] == 'text' and msgDict['msgContent'] == "借书":
-            return ArticalMsg(toUser,fromUser,'http://lib.star-chen.com/borrow?openid=').format()
+            return ArticalMsg(toUser,fromUser,'哟？你要借书吗?','快点我，点我，我带你飞!','http://lib.star-chen.com/borrow?openid=').format()
         elif msgDict['msgType'] == 'text' and msgDict['msgContent'] == "还书":
             return TextMsg(toUser,fromUser,"有人还书拉").format()
         if msgDict['msgType'] == 'text' and msgDict['msgContent'] == "绑定":
-            return ArticalMsg(toUser,fromUser,'http://lib.star-chen.com/bind?openid=').format()
+            return ArticalMsg(toUser,fromUser,'点我进入绑定流程~','霞姐说了,如果你不绑定是没法借书滴','http://lib.star-chen.com/bind?openid=').format()
         else:
             #调用图灵机器人接口回复一些其他内容
             tuling_url = "http://www.tuling123.com/openapi/api"

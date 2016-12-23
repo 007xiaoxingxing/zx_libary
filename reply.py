@@ -28,13 +28,15 @@ class TextMsg(Msg):
         """
         return XmlForm.format(**self.__dict)
 class ArticalMsg(Msg):
-    def __init__(self, toUserName, fromUserName,url):
+    def __init__(self, toUserName, fromUserName,title,des,url):
         self.__dict = dict()
         self.__dict['ToUserName'] = toUserName
         self.__dict['FromUserName'] = fromUserName
         self.__dict['CreateTime'] = int(time.time())
         self.__dict['OpenID'] = toUserName
         self.__dict['Url'] = url
+        self.__dict['Title'] = title
+        self.__dict['Description'] = des
 
     def format(self):
         XmlForm = """
@@ -46,8 +48,8 @@ class ArticalMsg(Msg):
             <ArticleCount>1</ArticleCount>
             <Articles>
                 <item>
-                <Title><![CDATA[点击进入绑定流程~]]></Title>
-                <Description><![CDATA[霞姐说了,不绑定是没法用滴]]></Description>
+                <Title><![CDATA[{Title}]]></Title>
+                <Description><![CDATA[{Description}]]></Description>
                 <PicUrl><![CDATA[https://blog.star-chen.com/img/bg.jpg]]></PicUrl>
                 <Url><![CDATA[{Url}{OpenID}]]></Url>
                 </item>
