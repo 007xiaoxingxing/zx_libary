@@ -90,7 +90,8 @@ class BorrowInfoHandler(tornado.web.RequestHandler):
         userID = result[0][0]
         timeStamp = result[0][1]
         userName = sqlHelper.ExcuteSQL("select name from user where id = {0}".format(userID))[0][0]
-        time2date = time.strftime("%Y-%m-%d %H:%M", timeStamp)
+        print timeStamp
+        time2date = time.strftime("%Y-%m-%d %H:%M", time.localtime(timeStamp))
         temp ={}
         temp['borrower'] = userName
         temp['borrowTime'] = time2date
