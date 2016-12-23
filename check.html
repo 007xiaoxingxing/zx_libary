@@ -9,6 +9,8 @@
 </head>
 <body>
 <div class="page" style="background: #f8f8f8;padding-top: 40px">
+    {% if len(events) > 0 %}
+    {% for event in events %}
     <div class="event" style="background: #ffffff;margin-top: 20px">
         <div class="weui-form-preview__hd">
             <div class="weui-form-preview__item">
@@ -27,96 +29,8 @@
             <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">准了!</a>
         </div>
     </div>
-    <div class="event" style="background: #ffffff;margin-top: 20px">
-        <div class="weui-form-preview__hd">
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">书名:</label>
-                <em class="weui-form-preview__value">金刚经</em>
-            </div>
-        </div>
-        <div class="weui-form-preview__bd">
-
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">借书：</label>
-                <span class="weui-form-preview__value">张三于某年某月申请归还</span>
-            </div>
-        </div>
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">准了!</a>
-        </div>
-    </div>
-    <div class="event" style="background: #ffffff;margin-top: 20px">
-        <div class="weui-form-preview__hd">
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">书名:</label>
-                <em class="weui-form-preview__value">金刚经</em>
-            </div>
-        </div>
-        <div class="weui-form-preview__bd">
-
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">借书：</label>
-                <span class="weui-form-preview__value">张三于某年某月申请归还</span>
-            </div>
-        </div>
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">准了!</a>
-        </div>
-    </div>
-    <div class="event" style="background: #ffffff;margin-top: 20px">
-        <div class="weui-form-preview__hd">
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">书名:</label>
-                <em class="weui-form-preview__value">金刚经</em>
-            </div>
-        </div>
-        <div class="weui-form-preview__bd">
-
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">借书：</label>
-                <span class="weui-form-preview__value">张三于某年某月申请归还</span>
-            </div>
-        </div>
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">准了!</a>
-        </div>
-    </div>
-    <div class="event" style="background: #ffffff;margin-top: 20px">
-        <div class="weui-form-preview__hd">
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">书名:</label>
-                <em class="weui-form-preview__value">金刚经</em>
-            </div>
-        </div>
-        <div class="weui-form-preview__bd">
-
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">借书：</label>
-                <span class="weui-form-preview__value">张三于某年某月申请归还</span>
-            </div>
-        </div>
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">准了!</a>
-        </div>
-    </div>
-    <div class="event" style="background: #ffffff;margin-top: 20px">
-        <div class="weui-form-preview__hd">
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">书名:</label>
-                <em class="weui-form-preview__value">金刚经</em>
-            </div>
-        </div>
-        <div class="weui-form-preview__bd">
-
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">借书：</label>
-                <span class="weui-form-preview__value">张三于某年某月申请归还</span>
-            </div>
-        </div>
-        <div class="weui-form-preview__ft">
-            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">准了!</a>
-        </div>
-    </div>
+    {% end %}
+    {% end %}
 
 
 
