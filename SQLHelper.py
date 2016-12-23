@@ -2,16 +2,19 @@
 import sqlite3
 import os
 
+
 class SQLHelper:
     dbName = "lib.sqlite3"
+
     def __init__(self):
         pass
-    #数据库初始化
+
+    # 数据库初始化
     def DBInit(self):
-        #检测数据库文件是否存在，若不存在则进行表的创建
-        if(os.path.exists(self.dbName)):
+        # 检测数据库文件是否存在，若不存在则进行表的创建
+        if (os.path.exists(self.dbName)):
             return
-        #创建用户表
+        # 创建用户表
         conn = sqlite3.connect(self.dbName)
         cu = conn.cursor()
         userTable = '''
@@ -44,8 +47,7 @@ class SQLHelper:
               `book_id` INTEGER,
               `borrow_time` NUMERIC,
               `back_time` NUMERIC DEFAULT 0,
-              `checked` INTEGER DEFAULT 0,
-              PRIMARY KEY(user_id,book_id,borrow_time)
+              `checked` INTEGER DEFAULT 0
 
             );
 
@@ -62,33 +64,44 @@ class SQLHelper:
 
             )
         '''
-        cu.execute(userTable) #创建用户表
-        cu.execute(bookTable) #创建书籍表
-        cu.execute(checkTable) #创建管理员审核表
-        cu.execute(borrowTable) #创建借阅关系表
-        #add a test book
-        cu.execute("insert into book(book_name,book_des,book_status,book_photo) VALUES(\"abc\",\"good book\",0,\"abc.jpg\")")
+
+        books = open('books.txt')
+        line = books.readline()
+        cu.execute(userTable)  # 创建用户表
+        cu.execute(bookTable)  # 创建书籍表
+        cu.execute(checkTable)  # 创建管理员审核表
+        cu.execute(borrowTable)  # 创建借阅关系表
+        # add a test book
+        #cu.execute(books)
+        while line:
+            cu.execute(line)
+            line = books.readline()
+        books.close()
         conn.commit()
         conn.close()
         pass
 
-    #执行sql语句，返回结果
-    def ExcuteSQL(self,sql):
+    # 执行sql语句，返回结果
+    def ExcuteSQL(self, sql):
         conn = self.GetConn()
         cur = conn.cursor()
-        cur.execute(sql)
-        conn.commit()
-        conn.close()
-        pass
-
-    #添加新用户
-    def AddUser(self,name,phone,openid):
+        try:
+            cur.execute(sql)
+            return cur.fetchall()
+        except Exception,e:
+            print e
+            return "error"
+        finally:
+            conn.commit()
+            conn.close()
+    # 添加新用户
+    def AddUser(self, name, phone, openid):
         conn = self.GetConn()
         cur = conn.cursor()
         addSQL = '''
             INSERT INTO user(name,phone,openid) VALUES("{0}","{1}","{2}")
         '''
-        sql = addSQL.format(name,phone,openid)
+        sql = addSQL.format(name, phone, openid)
         try:
             cur.execute(sql)
         except Exception, e:
@@ -99,8 +112,9 @@ class SQLHelper:
             conn.commit()
             conn.close()
         return "success"
-    #借书的数据库插入函数
-    def BorrowBook(self,userID,bookID,borrowTime):
+
+    # 借书的数据库插入函数
+    def BorrowBook(self, userID, bookID, borrowTime):
         borrowSQL = '''
             INSERT INTO borrow_list(user_id, book_id, borrow_time, back_time) VALUES({0}, {1}, {2}, {3});
         '''
@@ -118,18 +132,19 @@ class SQLHelper:
         try:
             cur.execute(borrowSQL)
             cur.execute(updateBook)
-            last_id = cur.execute("select LAST_INSERT_ROWID() from borrow_list").fetchone()[0]
+            last_id = cur.execute("SELECT LAST_INSERT_ROWID() FROM borrow_list").fetchone()[0]
             print insertCheckTable.format(last_id)
             cur.execute(insertCheckTable.format(last_id))
-        except Exception,e:
+        except Exception, e:
             print e
             return "error"
         finally:
             conn.commit()
             conn.close()
         return "success"
-    #归还书籍
-    def BackBook(self,userID,bookID,backTime):
+
+    # 归还书籍
+    def BackBook(self, userID, bookID, backTime):
         updateBookList = '''
 
             update borrow_list set back_time = {0} where user_id ={1} and book_id={2} and back_time=0;
@@ -143,16 +158,21 @@ class SQLHelper:
         '''
 
         updateBook = updateBook.format(bookID)
-        updateBookList = updateBookList.format(backTime,userID,bookID)
+        updateBookList = updateBookList.format(backTime, userID, bookID)
         conn = self.GetConn()
         cur = conn.cursor()
         try:
             cur.execute(updateBookList)
             cur.execute(updateBook)
-            print "select id from borrow_list where user_id={0} and book_id={1} and back_time={2}".format(userID,bookID,backTime)
-            last_id = cur.execute("select id from borrow_list where user_id={0} and book_id={1} and back_time={2}".format(userID,bookID,backTime)).fetchone()[0]
+            print "select id from borrow_list where user_id={0} and book_id={1} and back_time={2}".format(userID,
+                                                                                                          bookID,
+                                                                                                          backTime)
+            last_id = cur.execute(
+                "select id from borrow_list where user_id={0} and book_id={1} and back_time={2}".format(userID, bookID,
+                                                                                                        backTime)).fetchone()[
+                0]
             cur.execute(insertCheckTable.format(last_id))
-        except Exception,e:
+        except Exception, e:
             print e
             return "error"
         finally:
@@ -160,14 +180,15 @@ class SQLHelper:
             conn.close()
         return "success"
 
-    #根据openid获取用户id
-    def GetUserID(self,openID):
+    # 根据openid获取用户id
+    def GetUserID(self, openID):
         conn = self.GetConn()
         cur = conn.cursor()
-        cur.execute("select id from user where openid=\"%s\""%openID)
+        cur.execute("select id from user where openid=\"%s\"" % openID)
         id = cur.fetchone()[0]
         return id
-    #获取数据库连接
+
+    # 获取数据库连接
     def GetConn(self):
         conn = sqlite3.connect(self.dbName)
         return conn

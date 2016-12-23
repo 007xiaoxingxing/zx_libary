@@ -55,7 +55,9 @@ class BindHandler(tornado.web.RequestHandler):
 #处理借书请求的Handler
 class BorrowBookHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('borrow.html')
+        sqlHelper = SQLHelper()
+        books = sqlHelper.ExcuteSQL("select * from book")
+        self.render('borrow.html',book_list = books)
     def post(self):
         postBody = json.loads(self.request.body)
         bookID = postBody['bookID']
