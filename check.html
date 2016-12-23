@@ -15,14 +15,14 @@
         <div class="weui-form-preview__hd">
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">书名:</label>
-                <em class="weui-form-preview__value">金刚经</em>
+                <em class="weui-form-preview__value">{{event[1]}}</em>
             </div>
         </div>
         <div class="weui-form-preview__bd">
 
             <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">借书:{{event[1]}}</label>
-                <span class="weui-form-preview__value">张三于某年某月申请归还</span>
+                <label class="weui-form-preview__label">{{event[3]}}:</label>
+                <span class="weui-form-preview__value">{{event[2]}}于{{event[4]}}申请{{event[3]}}</span>
             </div>
         </div>
         <div class="weui-form-preview__ft">

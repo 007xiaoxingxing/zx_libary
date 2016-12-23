@@ -114,13 +114,16 @@ class CheckHandler(tornado.web.RequestHandler):
             book_name = sqlHelper.ExcuteSQL("select book_name from book where id=%s"%book_id)[0][0]
             user_name = sqlHelper.ExcuteSQL("select name from user where id=%s"%user_id)[0][0]
             if back_time == 0:
-                type = "外借"
+                type = "借出"
+                date = time.strftime("%Y-%m-%d", time.localtime(borrow_time))
             else:
                 type = "归还"
+                date = time.strftime("%Y-%m-%d", time.localtime(back_time))
             temp.append(id)
             temp.append(book_name)
             temp.append(user_name)
             temp.append(type)
+            temp.append(date)
             result.append(temp)
             print book_name,type,user_name
         #print borrow_list
