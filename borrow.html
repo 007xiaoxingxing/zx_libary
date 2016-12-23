@@ -36,8 +36,15 @@
                 <div class="weui-media-box__bd">
                     {% if book[3] == 0 %}
                     <p class="weui-media-box__desc book-status" style="color: #04be02;font-size: medium">可外借</p>
-                    {% else %}
+                    {% end %}
+                    {% if book[3] == 1 %}
                     <p class="weui-media-box__desc book-status" style="color: #ff0000;font-size: medium">已借出</p>
+                    {% end %}
+                    {% if book[3] == 2 %}
+                    <p class="weui-media-box__desc book-status" style="color: #ff0000;font-size: medium">外借待办</p>
+                    {% end %}
+                    {% if book[3] == 3 %}
+                    <p class="weui-media-box__desc book-status" style="color: #ff0000;font-size: medium">归还待办</p>
                     {% end %}
                 </div>
             </a>

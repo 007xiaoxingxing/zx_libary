@@ -119,11 +119,7 @@ class SQLHelper:
             INSERT INTO borrow_list(user_id, book_id, borrow_time, back_time) VALUES({0}, {1}, {2}, {3});
         '''
         updateBook = '''
-            update book set book_status = 1 where id = {0};
-        '''
-        insertCheckTable = '''
-
-            INSERT INTO borrow_check(check_type,borrow_list_id,checked) VALUES(0,{0},0);
+            update book set book_status = 2 where id = {0};
         '''
         updateBook = updateBook.format(bookID)
         borrowSQL = borrowSQL.format(userID, bookID, borrowTime, 0)
@@ -132,9 +128,6 @@ class SQLHelper:
         try:
             cur.execute(borrowSQL)
             cur.execute(updateBook)
-            last_id = cur.execute("SELECT LAST_INSERT_ROWID() FROM borrow_list").fetchone()[0]
-            print insertCheckTable.format(last_id)
-            cur.execute(insertCheckTable.format(last_id))
         except Exception, e:
             print e
             return "error"
@@ -150,11 +143,7 @@ class SQLHelper:
             update borrow_list set back_time = {0} where user_id ={1} and book_id={2} and back_time=0;
         '''
         updateBook = '''
-            update book set book_status = 0 where id = {0};
-        '''
-        insertCheckTable = '''
-
-            INSERT INTO borrow_check(check_type,borrow_list_id,checked) VALUES(1,{0},0);
+            update book set book_status = 3 where id = {0};
         '''
 
         updateBook = updateBook.format(bookID)
@@ -167,11 +156,6 @@ class SQLHelper:
             print "select id from borrow_list where user_id={0} and book_id={1} and back_time={2}".format(userID,
                                                                                                           bookID,
                                                                                                           backTime)
-            last_id = cur.execute(
-                "select id from borrow_list where user_id={0} and book_id={1} and back_time={2}".format(userID, bookID,
-                                                                                                        backTime)).fetchone()[
-                0]
-            cur.execute(insertCheckTable.format(last_id))
         except Exception, e:
             print e
             return "error"

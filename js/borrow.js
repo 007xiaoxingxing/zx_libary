@@ -24,7 +24,7 @@ $(document).ready(function () {
             $("#borrow-dlg").attr("book_id", book_id);
             $("#borrow-dlg").show();
         }
-        else if (status == "已借出")
+        else {
             $.ajax({
 
                 url: "borrowInfo?bookid=" + book_id,
@@ -42,7 +42,7 @@ $(document).ready(function () {
                     }
                 }
             });
-
+        }
     });
     $(".know-btn").click(function () {
 
@@ -64,7 +64,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data == "success") {
                     $("#borrow-dlg").hide();
-                    $("#book-" + bookID + " .book-status").html("已借出");
+                    $("#book-" + bookID + " .book-status").html("借出待审");
                     $("#book-" + bookID + " .book-status").css("color", "#f00");
 
                 }
