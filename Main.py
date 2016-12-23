@@ -87,7 +87,15 @@ class BorrowInfoHandler(tornado.web.RequestHandler):
         sqlHelper = SQLHelper()
         bookid = self.get_argument('bookid')
         result = sqlHelper.ExcuteSQL("select user_id,borrow_time from borrow_list where book_id={0} and back_time = 0 ".format(bookid))
-        print result
+        userID = result[0][0]
+        timeStamp = result[0][1]
+        userName = sqlHelper.ExcuteSQL("select name from user where id = {0}".format(userID))[0][0]
+        time2date = time.strftime("%Y-%m-%d %H:%M", timeStamp)
+        temp ={}
+        temp['borrower'] = userName
+        temp['borrowTime'] = time2date
+        print temp
+        self.write(json.dumps(temp))
 
 #个人中心
 class PersonHandler(tornado.web.RequestHandler):
