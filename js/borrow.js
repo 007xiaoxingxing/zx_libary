@@ -36,8 +36,8 @@ $(document).ready(function () {
     });
 
     $(".borrow-it").click(function () {
-        var openid = $("#borrow-dlg").attribute("openid");
-        var bookID = $("#borrow-dlg").attribute("book_id");
+        var openid = $("#borrow-dlg").attr("openid");
+        var bookID = $("#borrow-dlg").attr("book_id");
         $.ajax({
             url: "borrow",
             type: "POST",
