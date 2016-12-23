@@ -44,7 +44,8 @@ class SQLHelper:
               `book_id` INTEGER,
               `borrow_time` NUMERIC,
               `back_time` NUMERIC DEFAULT 0,
-              `checked` INTEGER DEFAULT 0
+              `checked` INTEGER DEFAULT 0,
+              PRIMARY KEY(user_id,book_id,borrow_time)
 
             );
 

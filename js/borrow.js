@@ -26,14 +26,21 @@ $(document).ready(function () {
     });
 
     $(".borrow-it").click(function () {
-
+        var openid = "123";
+        var bookID = "1";
         $.ajax({
 
-            url:"borrow",
-            type:"POST",
-            data:"{\"openID\":\"123\",\"bookID\":\"1\"}",
-            success:function(data){
-                alert(data);
+
+            url: "borrow",
+            type: "POST",
+            data: "{\"openID\":\""+openid+"\",\""+bookID+"\":\"1\"}",
+            success: function (data) {
+                if (data == "success") {
+                    $("#borrow-dlg").hide();
+                    $("#book-"+bookID+" .book-status").html("已借出");
+                    $("#book-"+bookID+" .book-status").css("color", "#f00");
+
+                }
             }
         })
 
