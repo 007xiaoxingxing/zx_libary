@@ -37,7 +37,7 @@ $(document).ready(function () {
                         borrow_time = obj.borrowTime;
                         info = borrower +"借于"+borrow_time;
                         console.log(info);
-                        $(".borrow_detail .borrow_detail").html(info);
+                        $(".borrow_detail").html(info);
                         $("#borrow-info").show();
                     }
                 }
