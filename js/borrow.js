@@ -31,7 +31,7 @@ $(document).ready(function () {
 
             url:"borrow",
             type:"POST",
-            data:"{\"userID\":\"123\",\"bookID\":\"1\"}",
+            data:"{\"openID\":\"123\",\"bookID\":\"1\"}",
             success:function(data){
                 alert(data);
             }
