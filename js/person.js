@@ -28,7 +28,7 @@ $(document).ready(function () {
     $(".back-it").click(function () {
 
         var openid =$(".back-it").attr("openid");
-        var book_id =$("#back-dlg").attr("book-id");
+        var book_id =$(".back-it").attr("book-id");
         $.ajax({
 
             url:"back",
