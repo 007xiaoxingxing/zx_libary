@@ -95,10 +95,11 @@ class SQLHelper:
             cur.execute(borrowSQL)
         except Exception,e:
             print e
+            return "error"
         finally:
             conn.commit()
             conn.close()
-        pass
+            return "success"
     #根据openid获取用户id
     def GetUserID(self,openID):
         conn = self.GetConn()
