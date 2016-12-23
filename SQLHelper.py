@@ -22,7 +22,38 @@ class SQLHelper:
             `openid` TEXT UNIQUE
             );
        '''
-        cu.execute(userTable)
+        bookTable = '''
+
+        CREATE TABLE `book` (
+
+          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+          `book_name` TEXT,
+          `book_des` TEXT, /*书籍简要描述*/
+          `book_status` INTEGER DEFAULT 0, /*书籍在架状态，0-在架，1-已外借*/
+          `book_photo` TEXT
+
+        );
+
+        '''
+
+        borrowTable = '''
+
+            CREATE TABLE `borrow_list` (
+
+              `user_id` INTEGER,
+              `book_id` INTEGER,
+              `borrow_time` NUMERIC,
+              `back_time` NUMERIC DEFAULT 0
+
+            );
+
+        '''
+
+        cu.execute(userTable) #创建用户表
+        cu.execute(bookTable) #创建书籍表
+        cu.execute(borrowTable) #创建借阅关系表
+        conn.commit()
+        conn.close()
         pass
 
     #执行sql语句，返回结果
@@ -42,7 +73,7 @@ class SQLHelper:
         except Exception, e:
             print e
             if str(e) == "column openid is not unique":
-                return "亲，你已经绑定过了"
+                return "您已经绑定过了"
         conn.commit()
         conn.close()
         return "success"

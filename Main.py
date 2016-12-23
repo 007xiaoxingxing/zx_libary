@@ -52,10 +52,18 @@ class BindHandler(tornado.web.RequestHandler):
         sqlHelper.DBInit()
         bindResult = sqlHelper.AddUser(userName,userPhone,userOpenID)
         self.write(bindResult)
+#处理借书请求的Handler
+class BorrowBookHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('borrow.html')
+    def post(self):
+        pass
+
 def main_app():
     return tornado.web.Application([
         (r'/',MainHandler),
         (r'/bind',BindHandler)
+        (r'/borrow',BorrowBookHandler)
     ])
 if __name__ == "__main__":
     reload(sys)
