@@ -103,18 +103,28 @@ class CheckHandler(tornado.web.RequestHandler):
         checkSQL = "select * from borrow_list where checked = 0"
         sqlHelper = SQLHelper()
         borrow_list = sqlHelper.ExcuteSQL(checkSQL)
+        result = []
         for event in borrow_list:
+            temp = []
+            id = event[0]
+            user_id = event[1]
             book_id = event[2]
             borrow_time = event[3]
             back_time = event[4]
             book_name = sqlHelper.ExcuteSQL("select book_name from book where id=%s"%book_id)[0][0]
+            user_name = sqlHelper.ExcuteSQL("select name from user where id=%s"%user_id)[0][0]
             if back_time == 0:
                 type = "外借"
             else:
                 type = "归还"
-            print book_name,type
+            temp.append(id)
+            temp.append(book_name)
+            temp.append(user_name)
+            temp.append(type)
+            result.append(temp)
+            print book_name,type,user_name
         #print borrow_list
-        self.render("check.html",events = borrow_list)
+        self.render("check.html",events = result)
         pass
     def post(self):
         pass
