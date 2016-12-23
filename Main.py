@@ -138,7 +138,7 @@ class PersonHandler(tornado.web.RequestHandler):
         sqlHepler = SQLHelper()
         userIDSQL = "select id from user where openid =\"{0}\"".format(openID)
 
-        myBorrowSQL = "select * from borrow_list where back_time = 0 and user_id ={0} and checked = 0"
+        myBorrowSQL = "select * from borrow_list where back_time = 0 and user_id ={0} or checked = 0"
         userID = sqlHepler.ExcuteSQL(userIDSQL)[0][0]
         myBorrowList = sqlHepler.ExcuteSQL(myBorrowSQL.format(userID))
         borrow_list =[]
