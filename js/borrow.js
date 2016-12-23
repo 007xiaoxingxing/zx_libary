@@ -17,8 +17,15 @@ $(document).ready(function () {
     $(".book-item").click(function () {
 
         var book_id = $(this).attr("id").substr(5);
-        console.log(book_id);
-        $("#borrow-dlg").show();
+        var status = $("#book-"+book_id+" .book-status").html();
+        if(status == "可外借"){
+            var book_des = $("#book-"+book_id+" .origin-des").html();
+            $(".book-des").html(book_des);
+            $("#borrow-dlg").attribute("book_id",book_id);
+            $("#borrow-dlg").show();
+        }
+        else if(status == "已外借")
+            console.log("已外借");
 
     });
 
@@ -29,8 +36,8 @@ $(document).ready(function () {
     });
 
     $(".borrow-it").click(function () {
-        var openid = "123";
-        var bookID = "1";
+        var openid = $("#borrow-dlg").attribute("openid");
+        var bookID = $("#borrow-dlg").attribute("book_id");
         $.ajax({
             url: "borrow",
             type: "POST",
