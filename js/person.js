@@ -28,12 +28,12 @@ $(document).ready(function () {
     $(".back-it").click(function () {
 
         var openid =$(".back-it").attr("openid");
-        var book_id =$(".back-it").attr("book-id");
+        var book_id =$("#back-dlg").attr("book-id");
         $.ajax({
 
             url:"back",
             type:"POST",
-            data:"{\"openID\":\""+open()+"\",\"bookID\":\""+book_id+"\"}",
+            data:"{\"openID\":\""+openid+"\",\"bookID\":\""+book_id+"\"}",
             success:function(data){
                 alert(data);
             }
