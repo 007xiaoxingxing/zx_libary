@@ -140,10 +140,12 @@ class PersonHandler(tornado.web.RequestHandler):
         myBorrowSQL = "select * from borrow_list where back_time = 0 and user_id ={0}"
         userID = sqlHepler.ExcuteSQL(userIDSQL)[0][0]
         myBorrowList = sqlHepler.ExcuteSQL(myBorrowSQL.format(userID))
+        borrow_list =[]
         for borrow in myBorrowList:
             book_id = borrow[2]
             book_info = sqlHepler.ExcuteSQL("select * from book where id = {0}".format(book_id))[0]
-        self.render('person.html',borrow_list = book_info)
+            borrow_list.append(book_info)
+        self.render('person.html',borrow_list = borrow_list)
     def post(self):
         pass
 def main_app():
