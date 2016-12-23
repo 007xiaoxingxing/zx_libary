@@ -60,10 +60,23 @@ class BorrowBookHandler(tornado.web.RequestHandler):
         postBody = json.loads(self.request.body)
         bookID = postBody['bookID']
         userOpenID = postBody['openID']
-        currentTime = time.time()
+        currentTime = int(time.time())
         sqlHelper = SQLHelper()
         userID = sqlHelper.GetUserID(userOpenID)
         result = sqlHelper.BorrowBook(userID,bookID,currentTime)
+        self.write(result)
+#处理还书请求Handler
+class BackBookHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("????懵逼")
+    def post(self):
+        postBody = json.loads(self.request.body)
+        bookID = postBody['bookID']
+        userOpenID = postBody['openID']
+        currentTime = int(time.time())
+        sqlHelper = SQLHelper()
+        userID = sqlHelper.GetUserID(userOpenID)
+        result = sqlHelper.BackBook(userID,bookID,currentTime)
         self.write(result)
 #个人中心
 class PersonHandler(tornado.web.RequestHandler):

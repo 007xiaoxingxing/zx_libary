@@ -39,21 +39,34 @@ class SQLHelper:
         borrowTable = '''
 
             CREATE TABLE `borrow_list` (
-
+              `id` INTEGER PRIMARY KEY AUTOINCREMENT,
               `user_id` INTEGER,
               `book_id` INTEGER,
               `borrow_time` NUMERIC,
-              `back_time` NUMERIC DEFAULT 0
+              `back_time` NUMERIC DEFAULT 0,
+              `checked` INTEGER DEFAULT 0
 
             );
 
         '''
 
+        checkTable = '''
+
+            CREATE TABLE `borrow_check` (
+
+              `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+              `check_type` INTEGER DEFAULT 0, /*0-借书，1-还书*/
+              `borrow_list_id` INTEGER ,
+              `checked` INTEGER DEFAULT 0 /*0-未审核，1-已审核*/
+
+            )
+        '''
         cu.execute(userTable) #创建用户表
         cu.execute(bookTable) #创建书籍表
+        cu.execute(checkTable) #创建管理员审核表
         cu.execute(borrowTable) #创建借阅关系表
         #add a test book
-        cu.execute("insert into book(book_name,book_des,book_status,book_photo) values(\"abc\",\"good book\",0,\"abc.jpg\")")
+        cu.execute("insert into book(book_name,book_des,book_status,book_photo) VALUES(\"abc\",\"good book\",0,\"abc.jpg\")")
         conn.commit()
         conn.close()
         pass
@@ -72,7 +85,7 @@ class SQLHelper:
         conn = self.GetConn()
         cur = conn.cursor()
         addSQL = '''
-            INSERT INTO user(name,phone,openid) values("{0}","{1}","{2}")
+            INSERT INTO user(name,phone,openid) VALUES("{0}","{1}","{2}")
         '''
         sql = addSQL.format(name,phone,openid)
         try:
@@ -88,13 +101,25 @@ class SQLHelper:
     #借书的数据库插入函数
     def BorrowBook(self,userID,bookID,borrowTime):
         borrowSQL = '''
-            INSERT INTO borrow_list(user_id, book_id, borrow_time, back_time) values({0}, {1}, {2}, {3})
+            INSERT INTO borrow_list(user_id, book_id, borrow_time, back_time) VALUES({0}, {1}, {2}, {3});
         '''
+        updateBook = '''
+            update book set book_status = 1 where id = {0};
+        '''
+        insertCheckTable = '''
+
+            INSERT INTO borrow_check(check_type,borrow_list_id,checked) VALUES(0,{0},0);
+        '''
+        updateBook = updateBook.format(bookID)
         borrowSQL = borrowSQL.format(userID, bookID, borrowTime, 0)
         conn = self.GetConn()
         cur = conn.cursor()
         try:
             cur.execute(borrowSQL)
+            cur.execute(updateBook)
+            last_id = cur.execute("select LAST_INSERT_ROWID() from borrow_list").fetchone()[0]
+            print insertCheckTable.format(last_id)
+            cur.execute(insertCheckTable.format(last_id))
         except Exception,e:
             print e
             return "error"
@@ -102,6 +127,38 @@ class SQLHelper:
             conn.commit()
             conn.close()
         return "success"
+    #归还书籍
+    def BackBook(self,userID,bookID,backTime):
+        updateBookList = '''
+
+            update borrow_list set back_time = {0} where user_id ={1} and book_id={2} and back_time=0;
+        '''
+        updateBook = '''
+            update book set book_status = 0 where id = {0};
+        '''
+        insertCheckTable = '''
+
+            INSERT INTO borrow_check(check_type,borrow_list_id,checked) VALUES(1,{0},0);
+        '''
+
+        updateBook = updateBook.format(bookID)
+        updateBookList = updateBookList.format(backTime,userID,bookID)
+        conn = self.GetConn()
+        cur = conn.cursor()
+        try:
+            cur.execute(updateBookList)
+            cur.execute(updateBook)
+            print "select id from borrow_list where user_id={0} and book_id={1} and back_time={2}".format(userID,bookID,backTime)
+            last_id = cur.execute("select id from borrow_list where user_id={0} and book_id={1} and back_time={2}".format(userID,bookID,backTime)).fetchone()[0]
+            cur.execute(insertCheckTable.format(last_id))
+        except Exception,e:
+            print e
+            return "error"
+        finally:
+            conn.commit()
+            conn.close()
+        return "success"
+
     #根据openid获取用户id
     def GetUserID(self,openID):
         conn = self.GetConn()

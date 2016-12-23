@@ -3,6 +3,7 @@ import urllib2
 import urllib
 import json
 import os
+import time
 from SQLHelper import *
 """
 tuling_url = "http://www.tuling123.com/openapi/api"
@@ -15,6 +16,8 @@ path = os.path.realpath(__file__)
 print path
 sqlHelper = SQLHelper()
 sqlHelper.DBInit()
-#sqlHelper.AddUser("张三","13800138000","vasdflasdlfjalsdkfjljl")
-sqlHelper.GetUserID("vasdflasdlfjalsdkfjljl")
-
+sqlHelper.AddUser("张三","13800138000","vasdflasdlfjalsdkfjljl")
+#sqlHelper.GetUserID("vasdflasdlfjalsdkfjljl")
+currentTime = int(time.time())
+#print sqlHelper.BorrowBook(1,1,currentTime)
+print sqlHelper.BackBook(1,1,currentTime)
