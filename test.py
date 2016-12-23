@@ -19,7 +19,7 @@ sqlHelper.DBInit()
 sqlHelper.AddUser("张三","13800138000","vasdflasdlfjalsdkfjljl")
 #sqlHelper.GetUserID("vasdflasdlfjalsdkfjljl")
 currentTime = int(time.time())
-#print sqlHelper.BorrowBook(1,1,currentTime)
+print sqlHelper.BorrowBook(1,1,currentTime)
 #print sqlHelper.BackBook(1,1,currentTime)
 '''
 books = sqlHelper.ExcuteSQL("select * from book")
