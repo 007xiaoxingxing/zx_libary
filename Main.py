@@ -58,12 +58,18 @@ class BorrowBookHandler(tornado.web.RequestHandler):
         self.render('borrow.html')
     def post(self):
         pass
-
+#个人中心
+class PersonHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('person.html')
+    def post(self):
+        pass
 def main_app():
     return tornado.web.Application([
         (r'/',MainHandler),
         (r'/bind',BindHandler),
-        (r'/borrow',BorrowBookHandler)
+        (r'/borrow',BorrowBookHandler),
+        (r'/person',PersonHandler)
     ])
 if __name__ == "__main__":
     reload(sys)
