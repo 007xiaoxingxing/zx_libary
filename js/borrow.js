@@ -21,7 +21,7 @@ $(document).ready(function () {
         if(status == "可外借"){
             var book_des = $("#book-"+book_id+" .origin-des").html();
             $(".book-des").html(book_des);
-            $("#borrow-dlg").attribute("book_id",book_id);
+            $("#borrow-dlg").attr("book_id",book_id);
             $("#borrow-dlg").show();
         }
         else if(status == "已外借")
