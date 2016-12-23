@@ -24,11 +24,29 @@ $(document).ready(function () {
             $("#borrow-dlg").attr("book_id",book_id);
             $("#borrow-dlg").show();
         }
-        else if(status == "已外借")
-            console.log("已外借");
+        else if(status == "已借出")
+            $.ajax({
+
+                url:"borrowInfo?bookid="+book_id,
+                type:"GET",
+                success:function(data){
+                    if(data != ""){
+
+                        obj = JSON.parse(data);
+                        borrower = obj.borrower;
+                        borrow_time = obj.borrowTime;
+                        info = borrower +"借于"+borrow_time;
+                        $(".borrow_detail .borrow_detail").html(info);
+                        $("#borrow-info").show();
+                    }
+                }
+            });
 
     });
+    $(".know-btn").click(function () {
 
+        $("#borrow-info").hide();
+    });
     $(".give-up").click(function () {
 
         $("#borrow-dlg").hide();

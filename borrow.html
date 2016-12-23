@@ -45,8 +45,8 @@
         {% end %}
     </div>
 </div>
-<!-- 对话框 -->
-<div class="js_dialog" id="borrow-dlg" openid ={{openid}} style="display:none;">
+<!-- 对话框1 -->
+<div class="js_dialog" id="borrow-dlg" openid={{openid}} style="display:none;">
     <div class="weui-mask"></div>
     <div class="weui-dialog">
         <div class="weui-dialog__hd"><strong class="weui-dialog__title">要借我吗？</strong></div>
@@ -54,6 +54,16 @@
         <div class="weui-dialog__ft">
             <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default give-up">算了,再看看</a>
             <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary borrow-it">借了它!</a>
+        </div>
+    </div>
+</div>
+<!-- 对话框1 -->
+<div class="js_dialog" id="borrow-info" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__bd borrow_detail">好像被谁借走了呢？</div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary know-btn">知道了</a>
         </div>
     </div>
 </div>

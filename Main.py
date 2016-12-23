@@ -81,6 +81,14 @@ class BackBookHandler(tornado.web.RequestHandler):
         userID = sqlHelper.GetUserID(userOpenID)
         result = sqlHelper.BackBook(userID,bookID,currentTime)
         self.write(result)
+#查询书籍的节约情况
+class BorrowInfoHandler(tornado.web.RequestHandler):
+    def get(self):
+        sqlHelper = SQLHelper()
+        bookid = self.get_argument('bookid')
+        result = sqlHelper.ExcuteSQL("select user_id,borrow_time from borrow_list where book_id={0} and back_time = 0 ".format(bookid))
+        print result
+
 #个人中心
 class PersonHandler(tornado.web.RequestHandler):
     def get(self):
