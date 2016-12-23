@@ -134,7 +134,14 @@ class CheckHandler(tornado.web.RequestHandler):
 #个人中心
 class PersonHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render('person.html')
+        openID = self.get_argument('openid')
+        sqlHepler = SQLHelper()
+        userIDSQL = "select id from user where openid ={0}".format(openID)
+        myBorrowSQL = "selct * from borrow_list where back_time = 0 and user_id ={0}"
+        userID = sqlHepler.ExcuteSQL(userIDSQL)[0][0]
+        myBorrowList = sqlHepler.ExcuteSQL(myBorrowSQL.format(userID))
+        print myBorrowList
+        self.render('person.html',borrow_list = myBorrowList)
     def post(self):
         pass
 def main_app():
