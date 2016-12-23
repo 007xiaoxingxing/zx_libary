@@ -24,6 +24,7 @@ $(document).ready(function () {
 
                 $("#back-dlg").hide();
 
+
             });
     $(".back-it").click(function () {
 
@@ -35,7 +36,12 @@ $(document).ready(function () {
             type:"POST",
             data:"{\"openID\":\""+openid+"\",\"bookID\":\""+book_id+"\"}",
             success:function(data){
-                alert(data);
+                if(data == "success"){
+
+                    $("#back-dlg").hide();
+                    $("#book-"+book_id).remove();
+
+                }
             }
         })
     });

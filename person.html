@@ -23,7 +23,7 @@
     <div class="book-list">
         {% for book in borrow_list %}
         <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg book-item" book-id="{{book[0]}}">
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg book-item" book-id="{{book[0]}}" id="book-{{book[0]}}">
                 <div class="weui-media-box__hd">
                     <img class="weui-media-box__thumb"
                          src="{{book[4]}}"
