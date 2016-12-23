@@ -41,7 +41,7 @@ $(document).ready(function () {
         $.ajax({
             url: "borrow",
             type: "POST",
-            data: "{\"openID\":\""+openid+"\",\""+bookID+"\":\"1\"}",
+            data: "{\"openID\":\""+openid+"\",\"bookID\":\""+bookID+"\"}",
             success: function (data) {
                 if (data == "success") {
                     $("#borrow-dlg").hide();
