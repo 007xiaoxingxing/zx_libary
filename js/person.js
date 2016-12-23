@@ -16,7 +16,7 @@ $(document).ready(function () {
 
             $(".book-item").click(function () {
                 var book_id =$(this).attr("book-id");
-                $("#back-dlg").attr("openid",book_id);
+                $("#back-dlg").attr("book-id",book_id);
                 $("#back-dlg").show();
             });
 
@@ -28,7 +28,7 @@ $(document).ready(function () {
     $(".back-it").click(function () {
 
         var openid =$(".back-it").attr("openid");
-        var book_id =$("#back-dlg").attr("openid");
+        var book_id =$("#back-dlg").attr("book-id");
         $.ajax({
 
             url:"back",
