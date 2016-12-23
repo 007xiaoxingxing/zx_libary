@@ -107,7 +107,7 @@ class CheckHandler(tornado.web.RequestHandler):
             book_id = event[2]
             borrow_time = event[3]
             back_time = event[4]
-            book_name = sqlHelper.ExcuteSQL("select book_name from book where id=%s"%book_id)[0]
+            book_name = sqlHelper.ExcuteSQL("select book_name from book where id=%s"%book_id)[0][0]
             print book_name
         #print borrow_list
         self.render("check.html",events = borrow_list)
