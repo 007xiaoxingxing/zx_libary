@@ -103,6 +103,7 @@ class CheckHandler(tornado.web.RequestHandler):
         checkSQL = "select * from borrow_check where checked = 0"
         sqlHelper = SQLHelper()
         result = sqlHelper.ExcuteSQL(checkSQL)
+        print result
         self.render("check.html",events = result)
         pass
     def post(self):
