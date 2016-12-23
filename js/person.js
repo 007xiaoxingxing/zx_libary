@@ -15,8 +15,8 @@ $(document).ready(function () {
             });
 
             $(".book-item").click(function () {
-             //   var book_id =$(this).attr("book-id");
-              //  $("#back-dlg").attr("openid",book_id);
+                var book_id =$(this).attr("book-id");
+                $("#back-dlg").attr("openid",book_id);
                 $("#back-dlg").show();
             });
 
