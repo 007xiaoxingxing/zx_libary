@@ -131,6 +131,9 @@ class CheckHandler(tornado.web.RequestHandler):
         self.render("check.html",events = result)
         pass
     def post(self):
+        postBody = json.loads(self.request.body)
+        bookID = postBody['bookID']
+        self.write("receive:"+bookID)
 
         pass
 #个人中心

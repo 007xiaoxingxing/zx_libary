@@ -8,7 +8,16 @@ $(document).ready(function () {
     $(".check-btn").click(function () {
 
         var book_id = $(this).attr("book-id");
-        console.log(book_id);
+        $.ajax({
+
+            url:"check",
+            type:"POST",
+            data:"{\"bookID\":"+book_id+"}",
+            success:function (data) {
+
+                console.log(data);
+            }
+        })
     });
 
 });
