@@ -10,12 +10,18 @@ class WechatAPI:
         fromUser = root.find('FromUserName').text
         toUser = root.find('ToUserName').text
         createTime = root.find('CreateTime').text
-        msgId = root.find('MsgId').text
         msgType = root.find('MsgType').text
-        result = {"fromUser":fromUser,"toUser":toUser,"createTime":createTime,"msgId":msgId,"msgType":msgType}
+        result = {"fromUser":fromUser,"toUser":toUser,"createTime":createTime,"msgType":msgType}
         #拼装文本消息
         if msgType == 'text':
             msgContent = root.find('Content').text
+            msgId = root.find('MsgId').text
             result["msgContent"] = msgContent
+            result["msgId"] = msgId
             return result
+        #拼装事件消息
+        if msgType == 'subscribe':
+            result['event'] = 'subscribe'
+            return result
+
 
