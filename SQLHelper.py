@@ -141,7 +141,7 @@ class SQLHelper:
     def BackBook(self, userID, bookID, backTime):
         updateBookList = '''
 
-            update borrow_list set back_time = {0} where user_id ={1} and book_id={2} and back_time=0;
+            update borrow_list set back_time = {0} checked = 0 where user_id ={1} and book_id={2} and back_time=0;
         '''
         #书籍状态为3，归还带审
         updateBook = '''
