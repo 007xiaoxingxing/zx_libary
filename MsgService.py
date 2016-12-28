@@ -17,7 +17,7 @@ class MsgService:
             return TextMsg(toUser,fromUser,"有人还书拉").format()
         elif msgDict['msgType'] == 'text' and msgDict['msgContent'] == "绑定":
             return ArticalMsg(toUser,fromUser,'点我进入绑定流程~','霞姐说了,如果你不绑定是没法借书滴','http://lib.star-chen.com/bind?openid=').format()
-        elif msgDict['msgType'] == 'text' and msgDict['msgContent'] == "审核" and msgDict['fromUser'] == 'oy1IAs2qSA2K9Ilx0UBoe117V6XI':
+        elif msgDict['msgType'] == 'text' and msgDict['msgContent'] == "审核" and msgDict['fromUser'] in ['oy1IAs2qSA2K9Ilx0UBoe117V6XI','oy1IAs2qSA2K9Ilx0UBoe117V6XI','oszGFwTFy5WroZkXMPU7sVgwsw_Y']:
             return ArticalMsg(toUser,fromUser,'看看都有谁借书了','霞妹妹,霞妹妹,我爱你','http://lib.star-chen.com/check?openid=').format()
         else:
             #调用图灵机器人接口回复一些其他内容
