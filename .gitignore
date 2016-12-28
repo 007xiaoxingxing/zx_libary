@@ -1,3 +1,4 @@
 /.idea
 *.pyc
 lib.sqlite3
+/screenshot
