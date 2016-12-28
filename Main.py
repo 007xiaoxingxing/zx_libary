@@ -4,6 +4,7 @@ from MsgService import *
 from SQLHelper import *
 import hashlib
 import sys
+import os
 import json
 import time
 import tornado.web
@@ -219,6 +220,8 @@ def main_app():
 if __name__ == "__main__":
     reload(sys)
     sys.setdefaultencoding('utf8')
+    os.environ["TZ"] = "Asia/Shanghai"
+    time.tzset()
     app = main_app()
     app.listen(81)
     tornado.ioloop.IOLoop.instance().start()
