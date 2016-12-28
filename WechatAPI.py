@@ -20,8 +20,8 @@ class WechatAPI:
             result["msgId"] = msgId
             return result
         #拼装事件消息
-        if msgType == 'subscribe':
-            result['event'] = 'subscribe'
+        if msgType == 'event':
+            result['event'] = root.find('Event').text
             return result
 
 
