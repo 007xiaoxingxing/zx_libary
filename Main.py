@@ -15,6 +15,7 @@ import tornado.ioloop
 class MainHandler(tornado.web.RequestHandler):
     def post(self):
         wechatXML = self.request.body
+        print wechatXML
         API = WechatAPI()
         msgService = MsgService()
         dictMsg = API.ParseWechatXML(wechatXML)

@@ -20,36 +20,37 @@
     </div>
 </div>
 <div class="container">
-    <div class="book-list">
-        {% if len(borrow_list) > 0 %}
-        {% for book in borrow_list %}
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg book-item" book-id="{{book[0]}}"
-               id="book-{{book[0]}}">
-                <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb"
-                         src="{{book[4]}}"
-                         alt="">
-                </div>
-                <div class="weui-media-box__bd">
-                    <h4 class="weui-media-box__title">{{book[1]}}</h4>
-                    <p class="weui-media-box__desc">{{book[2]}}</p>
-                </div>
+    <br class="book-list">
+    {% if len(borrow_list) > 0 %}
+    {% for book in borrow_list %}
+    <div class="weui-panel__bd">
+        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg book-item" book-id="{{book[0]}}"
+           id="book-{{book[0]}}">
+            <div class="weui-media-box__hd">
+                <img class="weui-media-box__thumb"
+                     src="{{book[4]}}"
+                     alt="">
+            </div>
+            <div class="weui-media-box__bd">
+                <h4 class="weui-media-box__title">{{book[1]}}</h4>
+                <p class="weui-media-box__desc">{{book[2]}}</p>
+            </div>
 
-            </a>
-        </div>
-        {% end %}
-        {% else %}
-
-        <div class="weui-msg__icon-area" style="width: 93px;margin:0 auto">
-            <i class="weui-icon-warn weui-icon_msg"></i>
-        </div>
-        <div class="weui-msg__text-area">
-            <p class="weui-msg__desc" style="width: 320px;margin-left:10%">貌似你并没有从呼呼这里借过书诶~</p>
-        </div>
-
-        {% end %}
+        </a>
     </div>
+    {% end %}
+    {% else %}
+
+    <div class="weui-msg__icon-area" style="width: 93px;margin:0 auto">
+        <i class="weui-icon-warn weui-icon_msg"></i>
+    </div>
+    <br/>
+    <div class="weui-msg__text-area">
+        <p class="weui-msg__desc" style="width: 320px;margin-left:10%">貌似你并没有从呼呼这里借过书诶~</p>
+    </div>
+
+    {% end %}
+</div>
 </div>
 <!-- 对话框 -->
 <div class="js_dialog" id="back-dlg" style="display:none;">

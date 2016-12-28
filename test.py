@@ -19,13 +19,14 @@ sqlHelper.DBInit()
 sqlHelper.AddUser("张三","13800138000","vasdflasdlfjalsdkfjljl")
 #sqlHelper.GetUserID("vasdflasdlfjalsdkfjljl")
 currentTime = int(time.time())
-print sqlHelper.BorrowBook(1,1,currentTime)
+#print sqlHelper.BorrowBook(1,1,currentTime)
 #print sqlHelper.BackBook(1,1,currentTime)
 '''
 books = sqlHelper.ExcuteSQL("select * from book")
 for book in books:
     print book
 '''
-result = sqlHelper.ExcuteSQL("select user_id,borrow_time from borrow_list where book_id={0} and back_time = 0 ".format(1))
-print result[0][1]
-print sqlHelper.ExcuteSQL("select name from user where id = {0}".format(1))[0][0]
+#result = sqlHelper.ExcuteSQL("select user_id,borrow_time from borrow_list where book_id={0} and back_time = 0 ".format(1))
+#print result[0][1]
+#print sqlHelper.ExcuteSQL("select name from user where id = {0}".format(1))[0][0]
+#oszGFwX5QQTupSvf7fv08FuVnTjU

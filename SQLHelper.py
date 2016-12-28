@@ -75,6 +75,7 @@ class SQLHelper:
         #cu.execute(books)
         while line:
             cu.execute(line)
+            print line
             line = books.readline()
         books.close()
         conn.commit()
