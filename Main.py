@@ -136,7 +136,7 @@ class CheckHandler(tornado.web.RequestHandler):
         type = postBody['type']
         sqlHelper = SQLHelper()
         updateBorrowList = "update borrow_list set checked = 1 where book_id = {0}"
-        if type == "外借":
+        if type == "借出":
             updateBook = "update book set book_status = 0 where id = {0} "
         if type == "归还":
             updateBook = "update book set book_status = 1 where id = {0} "
