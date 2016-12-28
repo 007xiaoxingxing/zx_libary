@@ -22,6 +22,7 @@ class MainHandler(tornado.web.RequestHandler):
         print dictMsg
         res = msgService.GetMsgRouter(dictMsg)
         print res
+        print res
         self.write(res)
     #处理来自微信服务器的get请求，即第一次的认证请求
     def get(self):
