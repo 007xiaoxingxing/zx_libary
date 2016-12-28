@@ -50,7 +50,7 @@ class ArticalMsg(Msg):
                 <item>
                 <Title><![CDATA[{Title}]]></Title>
                 <Description><![CDATA[{Description}]]></Description>
-                <PicUrl><![CDATA[https://blog.star-chen.com/img/bg.jpg]]></PicUrl>
+                <PicUrl><![CDATA[http://lib.star-chen.com/huhu.jpg]]></PicUrl>
                 <Url><![CDATA[{Url}{OpenID}]]></Url>
                 </item>
                 </item>
