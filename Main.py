@@ -124,12 +124,14 @@ class CheckHandler(tornado.web.RequestHandler):
             temp.append(user_name)
             temp.append(type)
             temp.append(date)
+            temp.append(book_id)
             result.append(temp)
             print book_name,type,user_name
         #print borrow_list
         self.render("check.html",events = result)
         pass
     def post(self):
+
         pass
 #个人中心
 class PersonHandler(tornado.web.RequestHandler):

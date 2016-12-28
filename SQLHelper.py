@@ -118,6 +118,7 @@ class SQLHelper:
         borrowSQL = '''
             INSERT INTO borrow_list(user_id, book_id, borrow_time, back_time) VALUES({0}, {1}, {2}, {3});
         '''
+        #书籍状态为2，外借待审
         updateBook = '''
             update book set book_status = 2 where id = {0};
         '''
@@ -142,6 +143,7 @@ class SQLHelper:
 
             update borrow_list set back_time = {0} where user_id ={1} and book_id={2} and back_time=0;
         '''
+        #书籍状态为3，归还带审
         updateBook = '''
             update book set book_status = 3 where id = {0};
         '''
