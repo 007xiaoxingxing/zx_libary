@@ -133,7 +133,7 @@ class CheckHandler(tornado.web.RequestHandler):
     def post(self):
         postBody = json.loads(self.request.body)
         bookID = postBody['bookID']
-        self.write("receive:"+bookID)
+        self.write("receive:%s"%bookID)
 
         pass
 #个人中心
