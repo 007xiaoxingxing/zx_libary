@@ -133,8 +133,16 @@ class CheckHandler(tornado.web.RequestHandler):
     def post(self):
         postBody = json.loads(self.request.body)
         bookID = postBody['bookID']
-        self.write("receive:%s"%bookID)
-
+        type = postBody['type']
+        sqlHelper = SQLHelper()
+        updateBorrowList = "update borrow_list set checked = 1 where book_id = {0}"
+        if type == "外借":
+            updateBook = "update book set book_status = 0 where id = {0} "
+        if type == "归还":
+            updateBook = "update book set book_status = 1 where id = {0} "
+        sqlHelper.ExcuteSQL(updateBorrowList.format(bookID))
+        sqlHelper.ExcuteSQL(updateBook.format(bookID))
+        self.write("success")
         pass
 #个人中心
 class PersonHandler(tornado.web.RequestHandler):
