@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 
 
-    $("check-btn").click(function () {
+    $(".check-btn").click(function () {
 
         var book_id = $(this).attr("book-id");
         console.log(book_id);
