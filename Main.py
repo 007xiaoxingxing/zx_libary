@@ -19,6 +19,7 @@ class MainHandler(tornado.web.RequestHandler):
         API = WechatAPI()
         msgService = MsgService()
         dictMsg = API.ParseWechatXML(wechatXML)
+        print dictMsg
         res = msgService.GetMsgRouter(dictMsg)
         print res
         self.write(res)
