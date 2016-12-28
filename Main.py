@@ -61,8 +61,8 @@ class BorrowBookHandler(tornado.web.RequestHandler):
         openID = self.get_argument('openid')
         sqlHelper = SQLHelper()
         userIdSQL = "select id from user where openid = \"{0}\""
-        userID = sqlHelper.ExcuteSQL(userIdSQL.format(openID))[0][0]
-        if userID == "":
+        userID = sqlHelper.ExcuteSQL(userIdSQL.format(openID))
+        if len(userID) < 1:
             self.write("呼呼觉得吧，您还是绑定一下比较好。发送\"绑定\"给我就可以了")
             return
         books = sqlHelper.ExcuteSQL("select * from book")
