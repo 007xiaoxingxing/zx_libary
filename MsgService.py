@@ -8,6 +8,7 @@ class MsgService:
     def GetMsgRouter(self,msgDict):
         toUser = msgDict['fromUser']
         fromUser = msgDict['toUser']
+        print msgDict
         if msgDict['msgType'] == 'event' and msgDict['event'] == 'subscribe':
             return ArticalMsg(toUser,fromUser,'欢迎来到呼呼借书，呼呼队长正在待命。1、2、3','既然你诚心诚意的关注了、那我们就大发慈悲地告诉你、为了防止世界被破坏、为了维护宇宙的和平、惯彻爱与真实的邪恶、我们是穿梭在知乎的借书队、好看、经典的图书等待着你们、就是这样、喵','http://mp.weixin.qq.com/s/CylfCDNFlWSkXz-NKR9BsQ')
         if msgDict['msgType'] == 'text' and msgDict['msgContent'] == "借书":
