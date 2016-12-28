@@ -13,7 +13,7 @@ $(document).ready(function () {
 
             url:"check",
             type:"POST",
-            data:"{\"bookID\":"+book_id+",\"type\":"+type+"}",
+            data:"{\"bookID\":"+book_id+",\"type\":\""+type+"\"}",
             success:function (data) {
 
                 console.log(data);
