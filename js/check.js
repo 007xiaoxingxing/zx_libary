@@ -8,7 +8,7 @@ $(document).ready(function () {
     $("check-btn").click(function () {
 
         var book_id = $(this).attr("book-id");
-        alert(book_id);
+        console.log(book_id);
     });
 
 });
