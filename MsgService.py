@@ -26,7 +26,7 @@ class MsgService:
             data = {'key':key,'info':msgDict['msgContent'],'userid':toUser}
             request = urllib2.Request(tuling_url)
             try:
-                res = urllib2.urlopen(request, urllib.urlencode(data), 3).read()
+                res = urllib2.urlopen(request, urllib.urlencode(data), 2).read()
             except Exception, e:
                 print e
                 return TextMsg(toUser,fromUser,"厉害了,我的哥，你成功的引起了我的注意").format()
