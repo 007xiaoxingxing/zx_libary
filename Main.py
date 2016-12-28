@@ -10,8 +10,7 @@ import tornado.web
 import tornado.ioloop
 
 
-
-#微信消息的主入口函数
+# 微信消息的主入口函数
 class MainHandler(tornado.web.RequestHandler):
     def post(self):
         wechatXML = self.request.body
@@ -24,7 +23,8 @@ class MainHandler(tornado.web.RequestHandler):
         print res
         print res
         self.write(res)
-    #处理来自微信服务器的get请求，即第一次的认证请求
+
+    # 处理来自微信服务器的get请求，即第一次的认证请求
     def get(self):
         signature = self.get_argument('signature')
         timestamp = self.get_argument('timestamp')
@@ -39,23 +39,28 @@ class MainHandler(tornado.web.RequestHandler):
         hashcode = sha1.hexdigest()
         if hashcode == signature:
             self.write(echostr)
-#处理绑定操作的handler
+
+
+# 处理绑定操作的handler
 class BindHandler(tornado.web.RequestHandler):
     def get(self):
         openid = self.get_argument('openid')
-        self.render("bind.html",openid=openid)
+        self.render("bind.html", openid=openid)
+
     def post(self):
-        #取得用户提交的json字符串，取出参数
+        # 取得用户提交的json字符串，取出参数
         postBody = json.loads(self.request.body)
         userName = postBody['user']
         userPhone = postBody['phone']
         userOpenID = postBody['openid']
-        #将数据插入sqlite数据库中
+        # 将数据插入sqlite数据库中
         sqlHelper = SQLHelper()
         sqlHelper.DBInit()
-        bindResult = sqlHelper.AddUser(userName,userPhone,userOpenID)
+        bindResult = sqlHelper.AddUser(userName, userPhone, userOpenID)
         self.write(bindResult)
-#处理借书请求的Handler
+
+
+# 处理借书请求的Handler
 class BorrowBookHandler(tornado.web.RequestHandler):
     def get(self):
         openID = self.get_argument('openid')
@@ -63,10 +68,19 @@ class BorrowBookHandler(tornado.web.RequestHandler):
         userIdSQL = "select id from user where openid = \"{0}\""
         userID = sqlHelper.ExcuteSQL(userIdSQL.format(openID))
         if len(userID) < 1:
-            self.write("呼呼觉得吧，您还是绑定一下比较好。发送\"绑定\"给我就可以了")
+            self.write('''
+            <div class="weui-msg__icon-area" style="width: 93px;margin:0 auto">
+        <i class="weui-icon-warn weui-icon_msg"></i>
+    </div>
+    <br/>
+    <div class="weui-msg__text-area">
+        <p class="weui-msg__desc" style="width: 320px;margin-left:10%">呼呼表示，您并没有绑定，请发送"绑定"给我</p>
+    </div>
+            ''')
             return
         books = sqlHelper.ExcuteSQL("select * from book")
-        self.render('borrow.html',book_list = books,openid=openID)
+        self.render('borrow.html', book_list=books, openid=openID)
+
     def post(self):
         postBody = json.loads(self.request.body)
         bookID = postBody['bookID']
@@ -74,12 +88,15 @@ class BorrowBookHandler(tornado.web.RequestHandler):
         currentTime = int(time.time())
         sqlHelper = SQLHelper()
         userID = sqlHelper.GetUserID(userOpenID)
-        result = sqlHelper.BorrowBook(userID,bookID,currentTime)
+        result = sqlHelper.BorrowBook(userID, bookID, currentTime)
         self.write(result)
-#处理还书请求Handler
+
+
+# 处理还书请求Handler
 class BackBookHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("????懵逼")
+
     def post(self):
         postBody = json.loads(self.request.body)
         bookID = postBody['bookID']
@@ -87,25 +104,30 @@ class BackBookHandler(tornado.web.RequestHandler):
         currentTime = int(time.time())
         sqlHelper = SQLHelper()
         userID = sqlHelper.GetUserID(userOpenID)
-        result = sqlHelper.BackBook(userID,bookID,currentTime)
+        result = sqlHelper.BackBook(userID, bookID, currentTime)
         self.write(result)
-#查询书籍的借阅情况
+
+
+# 查询书籍的借阅情况
 class BorrowInfoHandler(tornado.web.RequestHandler):
     def get(self):
         sqlHelper = SQLHelper()
         bookid = self.get_argument('bookid')
-        result = sqlHelper.ExcuteSQL("select user_id,borrow_time from borrow_list where book_id={0} and back_time = 0 ".format(bookid))
+        result = sqlHelper.ExcuteSQL(
+            "select user_id,borrow_time from borrow_list where book_id={0} and back_time = 0 ".format(bookid))
         userID = result[0][0]
         timeStamp = result[0][1]
         userName = sqlHelper.ExcuteSQL("select name from user where id = {0}".format(userID))[0][0]
         print timeStamp
         time2date = time.strftime("%Y-%m-%d %H:%M", time.localtime(timeStamp))
-        temp ={}
+        temp = {}
         temp['borrower'] = userName
         temp['borrowTime'] = time2date
         print temp
         self.write(json.dumps(temp))
-#管理员审核借书的情况
+
+
+# 管理员审核借书的情况
 class CheckHandler(tornado.web.RequestHandler):
     def get(self):
         checkSQL = "select * from borrow_list where checked = 0"
@@ -119,8 +141,8 @@ class CheckHandler(tornado.web.RequestHandler):
             book_id = event[2]
             borrow_time = event[3]
             back_time = event[4]
-            book_name = sqlHelper.ExcuteSQL("select book_name from book where id=%s"%book_id)[0][0]
-            user_name = sqlHelper.ExcuteSQL("select name from user where id=%s"%user_id)[0][0]
+            book_name = sqlHelper.ExcuteSQL("select book_name from book where id=%s" % book_id)[0][0]
+            user_name = sqlHelper.ExcuteSQL("select name from user where id=%s" % user_id)[0][0]
             if back_time == 0:
                 type = "借出"
                 date = time.strftime("%Y-%m-%d", time.localtime(borrow_time))
@@ -134,10 +156,11 @@ class CheckHandler(tornado.web.RequestHandler):
             temp.append(date)
             temp.append(book_id)
             result.append(temp)
-            print book_name,type,user_name
-        #print borrow_list
-        self.render("check.html",events = result)
+            print book_name, type, user_name
+        # print borrow_list
+        self.render("check.html", events=result)
         pass
+
     def post(self):
         postBody = json.loads(self.request.body)
         bookID = postBody['bookID']
@@ -152,7 +175,9 @@ class CheckHandler(tornado.web.RequestHandler):
         sqlHelper.ExcuteSQL(updateBook.format(bookID))
         self.write("success")
         pass
-#个人中心
+
+
+# 个人中心
 class PersonHandler(tornado.web.RequestHandler):
     def get(self):
         openID = self.get_argument('openid')
@@ -162,28 +187,35 @@ class PersonHandler(tornado.web.RequestHandler):
         myBorrowSQL = "select * from borrow_list where back_time = 0 and user_id ={0}"
         userID = sqlHepler.ExcuteSQL(userIDSQL)[0][0]
         myBorrowList = sqlHepler.ExcuteSQL(myBorrowSQL.format(userID))
-        borrow_list =[]
+        borrow_list = []
         for borrow in myBorrowList:
             book_id = borrow[2]
             book_info = sqlHepler.ExcuteSQL("select * from book where id = {0}".format(book_id))[0]
             borrow_list.append(book_info)
-        self.render('person.html',borrow_list = borrow_list,openid = openID)
+        self.render('person.html', borrow_list=borrow_list, openid=openID)
+
     def post(self):
         pass
+
+
 class SubscribeHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('sub.html')
+
+
 def main_app():
     return tornado.web.Application([
-        (r'/',MainHandler),
-        (r'/bind',BindHandler),
-        (r'/borrow',BorrowBookHandler),
-        (r'/back',BackBookHandler),
-        (r'/person',PersonHandler),
-        (r'/borrowInfo',BorrowInfoHandler),
-        (r'/check',CheckHandler),
-        (r'/sub',SubscribeHandler)
+        (r'/', MainHandler),
+        (r'/bind', BindHandler),
+        (r'/borrow', BorrowBookHandler),
+        (r'/back', BackBookHandler),
+        (r'/person', PersonHandler),
+        (r'/borrowInfo', BorrowInfoHandler),
+        (r'/check', CheckHandler),
+        (r'/sub', SubscribeHandler)
     ])
+
+
 if __name__ == "__main__":
     reload(sys)
     sys.setdefaultencoding('utf8')
