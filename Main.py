@@ -165,6 +165,9 @@ class PersonHandler(tornado.web.RequestHandler):
         self.render('person.html',borrow_list = borrow_list,openid = openID)
     def post(self):
         pass
+class SubscribeHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('sub.html')
 def main_app():
     return tornado.web.Application([
         (r'/',MainHandler),
@@ -173,7 +176,8 @@ def main_app():
         (r'/back',BackBookHandler),
         (r'/person',PersonHandler),
         (r'/borrowInfo',BorrowInfoHandler),
-        (r'/check',CheckHandler)
+        (r'/check',CheckHandler),
+        (r'/sub',SubscribeHandler)
     ])
 if __name__ == "__main__":
     reload(sys)
