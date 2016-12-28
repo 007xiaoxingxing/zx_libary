@@ -12,7 +12,7 @@
 <div class="page" style="background: #f8f8f8;padding-top: 40px">
     {% if len(events) > 0 %}
     {% for event in events %}
-    <div class="event" style="background: #ffffff;margin-top: 20px">
+    <div class="event" style="background: #ffffff;margin-top: 20px" id="book-{{event[5]}}">
         <div class="weui-form-preview__hd">
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">书名:</label>
@@ -34,11 +34,8 @@
     {% end %}
     {% end %}
     <div class="icon-box">
-            <i class="weui-icon-info weui-icon_msg"></i>
-            <div class="icon-box__ctn">
-                <p class="icon-box__desc">哎，没人借书也没人还书。Naive</p>
-            </div>
-        </div>
+        好像并没有有借.还书诶~~~
+    </div>
 
 
 </div>

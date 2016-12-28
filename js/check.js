@@ -16,7 +16,10 @@ $(document).ready(function () {
             data:"{\"bookID\":"+book_id+",\"type\":\""+type+"\"}",
             success:function (data) {
 
-                console.log(data);
+                if(data == "success"){
+
+                    $("#book-"+book_id).remove();
+                }
             }
         })
     });
