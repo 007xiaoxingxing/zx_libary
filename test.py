@@ -30,3 +30,5 @@ for book in books:
 #print result[0][1]
 #print sqlHelper.ExcuteSQL("select name from user where id = {0}".format(1))[0][0]
 #oszGFwX5QQTupSvf7fv08FuVnTjU
+#TODO:1.管理员界面，显示每本书已经被借走多少天
+#     2.回复书名可回复响应信息(书籍状态)

@@ -31,7 +31,7 @@
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 class="weui-media-box__title">{{book[1]}}</h4>
-                    <p class="weui-media-box__desc origin-des">{{book[2]}}</p>
+                    <p class="weui-media-box__desc origin-des">{% book[2][0:160] %}</p>
                 </div>
                 <div class="weui-media-box__bd">
                     {% if book[3] == 0 %}
