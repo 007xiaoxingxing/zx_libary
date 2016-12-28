@@ -24,6 +24,11 @@ class MsgService:
             tuling_url = "http://www.tuling123.com/openapi/api"
             key = "ad4c133e35c744acb3c707bd27d74e87"
             data = {'key':key,'info':msgDict['msgContent'],'userid':toUser}
-            res = urllib2.urlopen(tuling_url,urllib.urlencode(data)).read()
+            request = urllib2.Request(tuling_url)
+            try:
+                res = urllib2.urlopen(request, urllib.urlencode(data), 2).read()
+            except Exception, e:
+                print e
+                return TextMsg(toUser,fromUser,"厉害了,我的哥，你成功的引起了我的注意").format()
             return TextMsg(toUser,fromUser,json.loads(res)['text']).format()
 
